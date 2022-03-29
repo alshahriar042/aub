@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\DashboardController;
+use App\Http\Controllers\BackEnd\RoleController;
+use App\Http\Controllers\BackEnd\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +18,15 @@ use App\Http\Controllers\BackEnd\DashboardController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect()->route('login');
 });
 
 Auth::routes();
 
 Route::get('/home', [DashboardController::class,'index'])->name('dashboard');
+
+/* *************** Role *************** */
+Route::resource('roles',RoleController::class);
+
+/* *************** User *************** */
+Route::resource('users', UserController::class);

@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
-        <a href="{{ route('dashboard') }}"> <img alt="image" src="{{ asset('backEnd/assets/img/logo.png') }}" class="header-logo" /> <span
+        <a href="{{ route('dashboard') }}"> <img alt="image" src="{{ asset('backEnd/assets/img/aub.png') }}" class="header-logo" /> <span
             class="logo-name">AUB</span>
         </a>
       </div>
