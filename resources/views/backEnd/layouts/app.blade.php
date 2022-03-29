@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('backEnd/assets/css/components.css') }}">
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('backEnd/assets/css/custom.css') }}">
-    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('assets/img/favicon.ico') }}' />
+    <link rel='shortcut icon' type='image/x-icon' href="{{ asset('backEnd/assets/img/favicon.ico') }}" />
 </head>
 
 <body>
