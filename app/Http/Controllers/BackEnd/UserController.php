@@ -22,7 +22,7 @@ class UserController extends Controller
         Gate::authorize('users.index');
 
         $users = User::all();
-        return view('users.index', compact('users'));
+        return view('backEnd.users.index', compact('users'));
     }
 
     /**
@@ -35,7 +35,7 @@ class UserController extends Controller
         Gate::authorize('users.create');
 
         $roles = Role::all();
-        return view('users.form',compact('roles'));
+        return view('backEnd.users.form',compact('roles'));
     }
 
     /**
@@ -100,7 +100,7 @@ class UserController extends Controller
         Gate::authorize('users.edit');
 
         $roles = Role::all();
-        return view('users.form',compact('roles','user'));
+        return view('backEnd.users.form',compact('roles','user'));
     }
 
     /**

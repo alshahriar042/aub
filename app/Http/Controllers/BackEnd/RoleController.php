@@ -22,7 +22,7 @@ class RoleController extends Controller
         Gate::authorize('roles.index');
 
         $roles = Role::all();
-        return view('role.index',compact('roles'));
+        return view('backEnd.role.index',compact('roles'));
     }
 
     /**
@@ -35,7 +35,7 @@ class RoleController extends Controller
         Gate::authorize('roles.create');
 
         $modules = Module::all();
-        return view('role.form',compact('modules'));
+        return view('backEnd.role.form',compact('modules'));
     }
 
     /**
@@ -93,7 +93,7 @@ class RoleController extends Controller
         Gate::authorize('roles.edit');
 
         $modules = Module::all();
-        return view('role.form',compact('modules','role'));
+        return view('backEnd.role.form',compact('modules','role'));
     }
 
     /**

@@ -10,6 +10,29 @@
         <li class="dropdown active">
           <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
         </li>
+
+        <li class="menu-header">Authorization</li>
+        {{-- @if (Auth::user()->hasPermission('roles.index')) --}}
+            <li class="dropdown">
+                <a href="{{ route('roles.index') }}" class="menu-toggle nav-link">
+                    <i data-feather="sliders"></i><span>Roles and Permission</span></a>
+                <ul class="dropdown-menu">
+                    {{-- <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
+                    <li><a class="nav-link" href="{{ route('roles.create') }}">New Roles</a></li> --}}
+                </ul>
+            </li>
+            {{-- @endif --}}
+
+        {{-- @if (Auth::user()->hasPermission('users.index')) --}}
+        <li class="dropdown">
+            <a href="{{ route('users.index') }}" class="menu-toggle nav-link">
+                <i data-feather="users"></i><span>Users</span></a>
+            <ul class="dropdown-menu">
+            </ul>
+        </li>
+        {{-- @endif --}}
+
+
         <li class="dropdown">
           <a href="#" class="menu-toggle nav-link has-dropdown"><i
               data-feather="briefcase"></i><span>Widgets</span></a>

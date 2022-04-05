@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
+use App\Http\Controllers\BackEnd\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,9 @@ Route::resource('roles',RoleController::class);
 
 /* *************** User *************** */
 Route::resource('users', UserController::class);
+
+/* *************** Profile *************** */
+Route::get('profile',[ProfileController::class,'index'])->name('profile');
+Route::get('password',[ProfileController::class,'password'])->name('password');
+Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
+Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
