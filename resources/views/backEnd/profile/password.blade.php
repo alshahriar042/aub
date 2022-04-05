@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backEnd.layouts.app')
 
 @section('title', 'Password')
 

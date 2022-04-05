@@ -11,12 +11,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 
-class User extends Authenticatable
-// class User extends Authenticatable implements HasMedia
+// class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    // use HasApiTokens, HasFactory, Notifiable;
 
-    // use HasApiTokens, HasFactory, InteractsWithMedia, Notifiable;
+    use HasApiTokens, HasFactory, InteractsWithMedia, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,11 +53,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //image uload part
-    // public function registerMediaCollections() : void
-    // {
-    //     $this->addMediaCollection('avatar')->singleFile();
-    // }
+    // image uload part
+    public function registerMediaCollections() : void
+    {
+        $this->addMediaCollection('avatar')->singleFile();
+    }
 
     public function role()
     {
