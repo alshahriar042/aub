@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="{{ asset('backEnd/assets/css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('backEnd/assets/css/custom.css') }}">
     <link rel='shortcut icon' type='image/x-icon' href="{{ asset('backEnd/assets/img/favicon.ico') }}" />
+
+    <style>
+        body {
+            background-image: url("{{ URL::asset('aub.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-color: #cccccc;
+            background-size: cover;
+            /* background-position: center;
+            background-repeat: no-repeat; */
+        }
+    </style>
 </head>
 
 <body>
