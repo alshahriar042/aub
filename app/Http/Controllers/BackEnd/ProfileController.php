@@ -45,11 +45,15 @@ class ProfileController extends Controller
             // }
 
             $user->save();
-            return back()->with('success','Profile update succesfully.');
+
+            notify()->success("Profile update succesfully.", "Success");
+            return back();
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            return back()->with('warning', 'Profile update failed!');
+
+            notify()->error("Profile update failed!", "Error");
+            return back();
         }
 
     }
@@ -77,10 +81,12 @@ class ProfileController extends Controller
                 Auth::logout();
                 return redirect()->route('login');
             }else{
-                return back()->with('warning','New password can not be as old password!');
+                notify()->warning("New password can not be as old password!", "Warning");
+                return back();
             }
         }else{
-            return back()->with('error','Current password not match!');
+            notify()->error("Current password not match!", "Error");
+            return back();
         }
         return back();
     }

@@ -70,11 +70,14 @@ class UserController extends Controller
                 $user->addMedia($request->avatar)->toMediaCollection('avatar');
             }
 
-            return redirect()->route('users.index')->with('success', 'User Created Successfully.');
+            notify()->success("User create successfully.", "Success");
+            return redirect()->route('users.index');
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            return back()->with('warning', ' User Create Failed.');
+
+            notify()->error("User Create Failed.", "Error");
+            return back();
         }
     }
 
@@ -135,11 +138,14 @@ class UserController extends Controller
                 $user->addMedia($request->avatar)->toMediaCollection('avatar');
             }
 
-            return redirect()->route('users.index')->with('success', 'User Updated Successfully.');
+            notify()->success("User Updated Successfully.", "Success");
+            return redirect()->route('users.index');
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            return back()->with('warning', ' User Update Failed.');
+
+            notify()->error("User Update Failed", "Error");
+            return back();
         }
     }
 
@@ -155,6 +161,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return back()->with('success', 'User Deleted Successfully.');
+        notify()->success("User Deleted Successfully.", "Success");
+        return back();
     }
 }
