@@ -1,6 +1,6 @@
 @extends('backEnd.layouts.app')
 
-@section('title', 'Role | Top Gear Auto Service BD Ltd')
+@section('title', 'Role | AUB')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">

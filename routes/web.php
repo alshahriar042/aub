@@ -6,6 +6,7 @@ use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
 use App\Http\Controllers\BackEnd\ProfileController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,13 @@ Route::get('profile',[ProfileController::class,'index'])->name('profile');
 Route::get('password',[ProfileController::class,'password'])->name('password');
 Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
 Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
+
+/* *************** Course *************** */
+Route::get('course-list',[CourseController::class,'index'])->name('course.index');
+Route::get('course-create',[CourseController::class,'create'])->name('course.create');
+Route::post('course-store',[CourseController::class,'store'])->name('course.store');
+
+
+
+
+

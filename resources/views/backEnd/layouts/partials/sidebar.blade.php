@@ -32,6 +32,14 @@
         </li>
         {{-- @endif --}}
 
+        <li class="dropdown">
+            <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                data-feather="briefcase"></i><span>Courses</span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{ route('course.index') }}">Course</a></li>
+            </ul>
+          </li>
+
 
         <li class="dropdown">
           <a href="#" class="menu-toggle nav-link has-dropdown"><i

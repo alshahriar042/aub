@@ -1,6 +1,6 @@
 @extends('backEnd.layouts.app')
 
-@section('title', 'User Lists | Top Gear Auto Service BD Ltd')
+@section('title', 'User Lists | AUB')
 
 @section('content')
     <div class="section-body">

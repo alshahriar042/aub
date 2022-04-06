@@ -1,6 +1,6 @@
 @extends('backEnd.layouts.app')
 
-@section('title', 'Create Role | Top Gear Auto Service BD Ltd')
+@section('title', 'Create Role | AUB')
 
 @section('content')
 
