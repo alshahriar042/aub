@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BackEnd\DashboardController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
+use App\Http\Controllers\BackEnd\BatchController;
 use App\Http\Controllers\BackEnd\ProfileController;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\BackEnd\DashboardController;
+use App\Http\Controllers\BackEnd\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,26 +27,29 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [DashboardController::class,'index'])->name('dashboard');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', [DashboardController::class,'index'])->name('dashboard');
 
-/* *************** Role *************** */
-Route::resource('roles',RoleController::class);
+    /* *************** Role *************** */
+    Route::resource('roles',RoleController::class);
 
-/* *************** User *************** */
-Route::resource('users', UserController::class);
+    /* *************** User *************** */
+    Route::resource('users', UserController::class);
 
-/* *************** Profile *************** */
-Route::get('profile',[ProfileController::class,'index'])->name('profile');
-Route::get('password',[ProfileController::class,'password'])->name('password');
-Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
-Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
+    /* *************** Profile *************** */
+    Route::get('profile',[ProfileController::class,'index'])->name('profile');
+    Route::get('password',[ProfileController::class,'password'])->name('password');
+    Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
+    Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
 
-/* *************** Course *************** */
-Route::get('course-list',[CourseController::class,'index'])->name('course.index');
-Route::get('course-create',[CourseController::class,'create'])->name('course.create');
-Route::post('course-store',[CourseController::class,'store'])->name('course.store');
+    /* *************** Course *************** */
+    Route::get('course-list',[CourseController::class,'index'])->name('course.index');
+    Route::get('course-create',[CourseController::class,'create'])->name('course.create');
+    Route::post('course-store',[CourseController::class,'store'])->name('course.store');
 
+    /* *************** Department *************** */
+    Route::resource('departments',DepartmentController::class);
 
-
-
-
+    /* *************** Batch *************** */
+    Route::resource('batchs',BatchController::class);
+});

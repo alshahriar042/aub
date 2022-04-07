@@ -53,7 +53,6 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">{{ $course->created_at->diffForHumans() }}</td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>

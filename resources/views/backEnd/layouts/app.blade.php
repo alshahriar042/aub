@@ -61,35 +61,6 @@
         $(document).ready( function () {
             $('#tableExport1').DataTable();
         } );
-
-        // Toastr
-        // @if (Session::has('success'))
-        //     iziToast.success({
-        //     message: "{{ Session::get('success') }}",
-        //     position: 'topRight'
-        //     });
-        // @endif
-
-        // @if (Session::has('info'))
-        //     iziToast.info({
-        //     message: "{{ Session::get('info') }}",
-        //     position: 'topRight'
-        //     });
-        // @endif
-
-        // @if (Session::has('error'))
-        //     iziToast.error({
-        //     message: "{{ Session::get('error') }}",
-        //     position: 'topRight'
-        //     });
-        // @endif
-
-        // @if (Session::has('warning'))
-        //     iziToast.warning({
-        //     message: "{{ Session::get('warning') }}",
-        //     position: 'topRight'
-        //     });
-        // @endif
     </script>
 
     @yield('js')

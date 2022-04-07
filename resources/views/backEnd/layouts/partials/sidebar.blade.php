@@ -8,7 +8,7 @@
       <ul class="sidebar-menu">
         <li class="menu-header">Main</li>
         <li class="dropdown active">
-          <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+          <a href="{{ route('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
         </li>
 
         <li class="menu-header">Authorization</li>
@@ -32,16 +32,33 @@
         </li>
         {{-- @endif --}}
 
+        <li class="menu-header">Academic</li>
+
         <li class="dropdown">
             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                 data-feather="briefcase"></i><span>Courses</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('course.index') }}">Course</a></li>
             </ul>
-          </li>
+        </li>
 
+        <li class="menu-header">LookUp</li>
 
         <li class="dropdown">
+            <a href="{{ route('departments.index') }}" class="menu-toggle nav-link">
+                <i data-feather="briefcase"></i><span>Department</span></a>
+            <ul class="dropdown-menu">
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="{{ route('batchs.index') }}" class="menu-toggle nav-link">
+                <i data-feather="briefcase"></i><span>Batch</span></a>
+            <ul class="dropdown-menu">
+            </ul>
+        </li>
+
+        {{-- <li class="dropdown">
           <a href="#" class="menu-toggle nav-link has-dropdown"><i
               data-feather="briefcase"></i><span>Widgets</span></a>
           <ul class="dropdown-menu">
@@ -66,7 +83,7 @@
             <li><a class="nav-link" href="email-read.html">read</a></li>
           </ul>
         </li>
-        <li class="menu-header">UI Elements</li>
+        <li class="menu-header">UI Elements</li> --}}
 
       </ul>
     </aside>
