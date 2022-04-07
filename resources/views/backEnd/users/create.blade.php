@@ -20,6 +20,7 @@
                         <form action="{{ route('users.store') }}" method="POST">
                             @csrf
                             <div class="row">
+
                                 <div class="col-6">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control" placeholder="First name">

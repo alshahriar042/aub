@@ -25,7 +25,21 @@
                             <i class="fa fa-arrow-circle-left"></i>
                             <span>Back to list</span>
                         </a>
+
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body text-center">
+                            <h5>
+                                <span style="float:right">
+                                    <strong>
+                                        ID No:&nbsp;&nbsp;{{ $id_no }}</span>
+
+                                    </strong>
+                            </h5>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <form action="{{ isset($user) ? route('users.update',$user->id) : route('users.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -39,7 +53,6 @@
                                         <div class="col-md-8">
                                             <div class="card-body" style="padding: 10px;">
                                                 <h5 class="card-title">User Info</h5>
-
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
                                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name ?? old('name') }}" placeholder="Enter user name" autofocus>

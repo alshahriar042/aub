@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackEnd;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -32,10 +33,21 @@ class UserController extends Controller
      */
     public function create()
     {
+
         Gate::authorize('users.create');
 
+        $month = date("m");
+        $max_rec_id = DB::select(DB::raw("select count(*) max_job_id from users where month(created_at) = $month"));
+        if ($max_rec_id[0]->max_job_id == 0) {
+            $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
+        } else {
+            $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
+        }
+        $id_no = "AUB" . "-" . date("ymd") . $max_job_id;
+
+
         $roles = Role::all();
-        return view('backEnd.users.form',compact('roles'));
+        return view('backEnd.users.form',compact('roles','id_no'));
     }
 
     /**
@@ -46,6 +58,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         Gate::authorize('users.create');
 
         $this->validate($request,[
@@ -58,6 +71,16 @@ class UserController extends Controller
         ]);
 
         try {
+
+            $month = date("m");
+            $max_rec_id = DB::select(DB::raw("select count(*) max_job_id from users where month(created_at) = $month"));
+            if ($max_rec_id[0]->max_job_id == 0) {
+                $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
+            } else {
+                $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
+            }
+            $id_no = "AUB" . "-" . date("ymd") . $max_job_id;
+
             $user = User::create([
                 'role_id'  => $request->role,
                 'name'     => $request->name,
