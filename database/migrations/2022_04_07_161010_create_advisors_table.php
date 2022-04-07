@@ -17,6 +17,8 @@ class CreateAdvisorsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('student_id');
+            $table->string('credit');
+            $table->string('semister');
             $table->integer('course_id');
             $table->integer('fee');
             $table->timestamps();
