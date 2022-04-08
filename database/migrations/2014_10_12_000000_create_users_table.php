@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
+            $table->integer('user_id')->unique()->nullable();
+            $table->foreignId('batch_id')->onDelete('cascade')->nullable();
+            $table->foreignId('dept_id')->onDelete('cascade')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('status')->default(true);

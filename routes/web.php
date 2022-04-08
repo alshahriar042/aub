@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
 use App\Http\Controllers\BackEnd\BatchController;
+use App\Http\Controllers\BackEnd\AdvisorController;
 use App\Http\Controllers\BackEnd\ProfileController;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
@@ -52,4 +53,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     /* *************** Batch *************** */
     Route::resource('batchs',BatchController::class);
+
+    /* *************** Advisor *************** */
+    Route::resource('advisors',AdvisorController::class);
 });

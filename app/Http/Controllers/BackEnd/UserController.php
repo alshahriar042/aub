@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
+use App\Models\Department;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
@@ -45,9 +47,11 @@ class UserController extends Controller
         }
         $id_no = "AUB" . "-" . date("ymd") . $max_job_id;
 
+        $roles       = Role::all();
+        $batchs      = Batch::all();
+        $departments = Department::all();
 
-        $roles = Role::all();
-        return view('backEnd.users.form',compact('roles','id_no'));
+        return view('backEnd.users.form',compact('roles','departments','batchs','id_no'));
     }
 
     /**

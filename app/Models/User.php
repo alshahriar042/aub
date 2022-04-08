@@ -68,6 +68,16 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(Role::class);
     }
 
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
     public function hasPermission($permission): bool
     {
         return $this->role->permissions()->where('slug', $permission)->first() ? true : false;

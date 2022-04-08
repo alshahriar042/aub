@@ -4,7 +4,9 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}">
 @endsection
+
 
 @section('content')
     <div class="section-body">
@@ -28,7 +30,7 @@
 
                     </div>
 
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="card-body text-center">
                             <h5>
                                 <span style="float:right">
@@ -38,7 +40,7 @@
                                     </strong>
                             </h5>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="card-body">
                         <form action="{{ isset($user) ? route('users.update',$user->id) : route('users.store') }}" method="post" enctype="multipart/form-data">
@@ -104,8 +106,56 @@
                                                         </p>
                                                     @enderror
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="gender">Gender</label>
+                                                    <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" autofocus>
+                                                        <option value="">Select Gender</option>
+                                                        <option value="female" {{ @$user->gender == "female" ? 'selected' : ''}}>Male</option>
+                                                        <option value="male" {{ @$user->gender == "male" ? 'selected' : ''}}>Male</option>
+                                                        <option value="others" {{ @$user->gender == "others" ? 'selected' : ''}}>Other's</option>
+                                                    </select>
+
+                                                    @error('department')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="row" style="padding-left: 20px; padding-right: 20px;">
+                                                    <div class="col-md-3" style="padding: 0px">
+                                                        <div class="form-group">
+                                                            <label for="gender">User Type</label><br>
+                                                            <input type="radio" id="student" name="user_type" value="student"> Student&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" id="teacher" name="user_type" value="teacher"> Teacher
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-9" style="padding: 0px; width: 100%" >
+                                                        <div class="form-group" id="batch_data">
+                                                            <label for="batch">Batch</label>
+                                                            <select id="batch" class="form-control @error('batch') is-invalid @enderror" name="batch" autofocus>
+                                                                <option value="">Select Batch</option>
+                                                                @foreach($batchs as $batch)
+                                                                <option value="{{ $batch->id }}" {{ @$user->batch->id == $batch->id ? 'selected' : ''}}>{{ $batch->name }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @error('batch')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
+
+
+
                                         <div class="col-md-4">
                                             <div class="card-body" style="padding: 10px;">
                                                 <h5 class="card-title">Select Roles and Status</h5>
@@ -113,13 +163,29 @@
                                                 <div class="form-group">
                                                     <label for="role">Role</label>
                                                     <select id="role" class="form-control select2 @error('role') is-invalid @enderror" name="role" autofocus>
-                                                        <option value="">Select role</option>
+                                                        <option value="">Select Role</option>
                                                         @foreach($roles as $role)
                                                         <option value="{{ $role->id }}" {{ @$user->role->id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
                                                         @endforeach
                                                     </select>
 
                                                     @error('role')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="department">Department</label>
+                                                    <select id="department" class="form-control select2 @error('department') is-invalid @enderror" name="department" autofocus>
+                                                        <option value="">Select Department</option>
+                                                        @foreach($departments as $department)
+                                                        <option value="{{ $department->id }}" {{ @$user->department->id == $department->id ? 'selected' : ''}}>{{ $department->name }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('department')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -138,7 +204,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="custom-control custom-switch">
+                                                    <div class="custom-control custom-switch" style="padding: 0px;">
                                                         <input type="checkbox" class="custom-control-input" name="status" id="status" {{ @$user->status == true ? 'checked' : ''}}>
                                                         <label class="custom-control-label" for="status" style="margin-left: 35px;">Status</label>
                                                     </div><br>
@@ -171,9 +237,21 @@
 @endsection
 
 @section('js')
+    <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     {{-- image --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     <script>
         $('.dropify').dropify();
+        $('.js-example-basic-single').select2();
+
+        $("#batch_data").hide();
+
+        $("#student").click(function(){
+            $("#batch_data").show();
+        });
+
+        $("#teacher").click(function(){
+            $("#batch_data").hide();
+        });
     </script>
 @endsection

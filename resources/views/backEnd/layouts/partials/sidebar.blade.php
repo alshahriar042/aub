@@ -35,10 +35,16 @@
         <li class="menu-header">Academic</li>
 
         <li class="dropdown">
-            <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                data-feather="briefcase"></i><span>Courses</span></a>
+            <a href="{{ route('course.index') }}" class="menu-toggle nav-link">
+                <i data-feather="life-buoy"></i><span>Courses</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{ route('course.index') }}">Course</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="{{ route('advisors.index') }}" class="menu-toggle nav-link">
+                <i data-feather="heart"></i><span>Advisor</span></a>
+            <ul class="dropdown-menu">
             </ul>
         </li>
 
@@ -53,37 +59,10 @@
 
         <li class="dropdown">
             <a href="{{ route('batchs.index') }}" class="menu-toggle nav-link">
-                <i data-feather="briefcase"></i><span>Batch</span></a>
+                <i data-feather="package"></i><span>Batch</span></a>
             <ul class="dropdown-menu">
             </ul>
         </li>
-
-        {{-- <li class="dropdown">
-          <a href="#" class="menu-toggle nav-link has-dropdown"><i
-              data-feather="briefcase"></i><span>Widgets</span></a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="widget-chart.html">Chart Widgets</a></li>
-            <li><a class="nav-link" href="widget-data.html">Data Widgets</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Apps</span></a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="chat.html">Chat</a></li>
-            <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
-            <li><a class="nav-link" href="blog.html">Blog</a></li>
-            <li><a class="nav-link" href="calendar.html">Calendar</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Email</span></a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-            <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-            <li><a class="nav-link" href="email-read.html">read</a></li>
-          </ul>
-        </li>
-        <li class="menu-header">UI Elements</li> --}}
 
       </ul>
     </aside>
