@@ -23,6 +23,31 @@ class RoleSeeder extends Seeder
             'deletable' => false
         ])->permissions()->sync($adminPermissions->pluck('id'));
 
+        // $dashboardPermissions = Permission::where('slug','dashboard')->first();
+
+        // $teacherRole = Role::updateOrCreate([
+        //     'name'      => 'Teacher',
+        //     'slug'      => 'teacher',
+        //     'deletable' => false
+        // ]);
+        // $teacherRole->permissions()->updateOrCreate([
+        //     'permission_id' => $dashboardPermissions->pluck('id'),
+        //     'role_id'       => $teacherRole->id
+        // ]);
+
+        // Role::updateOrCreate([
+        //     'name'      => 'User',
+        //     'slug'      => 'user',
+        //     'deletable' => false
+        // ])->permissions()->sync($dashboardPermissions->pluck('id'));
+
+
+        Role::updateOrCreate([
+            'name'      => 'Teacher',
+            'slug'      => 'teacher',
+            'deletable' => false
+        ]);
+
         Role::updateOrCreate([
             'name'      => 'User',
             'slug'      => 'user',

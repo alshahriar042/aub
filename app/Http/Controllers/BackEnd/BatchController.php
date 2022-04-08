@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\BackEnd;
 
-use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class BatchController extends Controller
 {
@@ -14,7 +16,8 @@ class BatchController extends Controller
      */
     public function index()
     {
-        //
+        $batchs = Batch::all();
+        return view('backEnd.batch.index',compact('batchs'));
     }
 
     /**
@@ -24,7 +27,7 @@ class BatchController extends Controller
      */
     public function create()
     {
-        //
+        return view('backEnd.batch.form');
     }
 
     /**
@@ -35,7 +38,24 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|numeric|min:1|max:3|unique:batches',
+        ]);
+
+        try {
+            Batch::create([
+                'name' => $request->name,
+            ]);
+
+            notify()->success("Batch create successfully.", "Success");
+            return redirect()->route('batchs.index');
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            notify()->error("Batch Create Failed.", "Error");
+            return back();
+        }
     }
 
     /**
@@ -57,7 +77,8 @@ class BatchController extends Controller
      */
     public function edit($id)
     {
-        //
+        $batch = Batch::findOrFail($id);
+        return view('backEnd.batch.form',compact('batch'));
     }
 
     /**
@@ -69,7 +90,26 @@ class BatchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $batch = Batch::findOrFail($id);
+
+        $this->validate($request,[
+            'name'  => 'required|numeric|min:1|max:3|unique:batches,name,'.$batch->id,
+        ]);
+
+        try{
+            $batch->update([
+                'name'     => $request->name,
+            ]);
+
+            notify()->success("Batch Updated Successfully.", "Success");
+            return redirect()->route('batchs.index');
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            notify()->error("Batch Update Failed", "Error");
+            return back();
+        }
     }
 
     /**
@@ -80,6 +120,9 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Batch::findOrFail($id)->delete();
+
+        notify()->success("Batch delete successfully.", "Success");
+        return back();
     }
 }

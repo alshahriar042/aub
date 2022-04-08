@@ -28,6 +28,16 @@ class UserSeeder extends Seeder
         ]);
 
         User::updateOrCreate([
+            'role_id'  => Role::where('slug','teacher')->first()->id,
+            'name'     => 'Teacher',
+            'email'    => 'teacher@app.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'status'   => true,
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::updateOrCreate([
             'role_id'  => Role::where('slug','user')->first()->id,
             'name'     => 'User',
             'email'    => 'user@app.com',
