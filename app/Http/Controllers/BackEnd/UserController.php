@@ -62,35 +62,49 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         Gate::authorize('users.create');
 
-        $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'email'  => 'required|string|email|max:255|unique:users',
-            'password' => 'required|confirmed|string|min:8',
-            'avatar' => 'required|image',
-            'role' => 'required',
-            'status' => 'required'
-        ]);
+        if ($request->user_type == "student") {
+            $this->validate($request,[
+                'name'       => 'required|string|max:255',
+                'email'      => 'required|string|email|max:255|unique:users',
+                'password'   => 'required|confirmed|string|min:8',
+                'gender'     => 'required',
+                'department' => 'required',
+                'batch'      => 'required',
+                'avatar'     => 'required|image',
+                'role'       => 'required',
+                'status'     => 'required'
+            ]);
+        }
+
+        if ($request->user_type == "teacher") {
+            $this->validate($request,[
+                'name'        => 'required|string|max:255',
+                'email'      => 'required|string|email|max:255|unique:users',
+                'password'   => 'required|confirmed|string|min:8',
+                'gender'     => 'required',
+                'department' => 'required',
+                'avatar'     => 'required|image',
+                'role'       => 'required',
+                'status'     => 'required'
+            ]);
+        }
 
         try {
 
-            $month = date("m");
-            $max_rec_id = DB::select(DB::raw("select count(*) max_job_id from users where month(created_at) = $month"));
-            if ($max_rec_id[0]->max_job_id == 0) {
-                $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
-            } else {
-                $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
-            }
-            $id_no = "AUB" . "-" . date("ymd") . $max_job_id;
+            $user_id = date("Ym").rand(100,999);
 
             $user = User::create([
-                'role_id'  => $request->role,
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'password' => Hash::make($request->password),
-                'status'   => $request->filled('status')
+                'role_id'    => $request->role,
+                'name'       => $request->name,
+                'email'      => $request->email,
+                'password'   => Hash::make($request->password),
+                'gender'     => $request->gender,
+                'department_id' => $request->department,
+                'batch_id'      => $request->batch ? $request->batch : NULL,
+                'user_id'    => $user_id,
+                'status'     => $request->filled('status')
             ]);
 
             if ($request->hasFile('avatar')) {
@@ -129,8 +143,11 @@ class UserController extends Controller
     {
         Gate::authorize('users.edit');
 
-        $roles = Role::all();
-        return view('backEnd.users.form',compact('roles','user'));
+        $roles       = Role::all();
+        $batchs      = Batch::all();
+        $departments = Department::all();
+
+        return view('backEnd.users.form',compact('roles','departments','batchs','user'));
     }
 
     /**

@@ -36,6 +36,9 @@ class User extends Authenticatable implements HasMedia
         'fathers_name',
         'mothers_name',
         'address',
+        'user_id',
+        'batch_id',
+        'department_id'
     ];
 
     /**
