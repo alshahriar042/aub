@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Advisor;
+use App\Models\Advised;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
-class AdvisorController extends Controller
+class AdvisedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class AdvisorController extends Controller
      */
     public function index()
     {
-        $advisors = Advisor::all();
+        $advisors = Advised::all();
         return view('backEnd.advisor.index',compact('advisors'));
     }
 
@@ -26,7 +27,9 @@ class AdvisorController extends Controller
      */
     public function create()
     {
-        //
+        $courses =Course::orderBY('id')->get();
+        // dd($courses);
+        return view('backEnd.advisor.create',compact('courses'));
     }
 
     /**

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\BackEnd;
 
-use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class CourseController extends Controller
 {
@@ -14,8 +18,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $courses = Course::all();
+        return view('backEnd.course.index', compact('courses'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +28,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $departments= Department::orderBy('id')->get();
+        $teachers = User::where('role_id',2)->get();
+
+        return view('backEnd.course.create',compact('departments','teachers'));
     }
 
     /**
@@ -35,7 +42,36 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  dd($request->all());
+        $this->validate($request,[
+            'code'  => 'required',
+            'name' => 'required',
+            'credit' => 'required',
+            'teacher_id' => 'teacher',
+            'amount' => 'required',
+
+        ]);
+
+        try {
+            $user = Course::create([
+                'dept_id'  => $request->department,
+                'teacher_id'  => $request->teacher,
+                'code'     => $request->code,
+                'name'     => $request->name,
+                'credit'   => $request->credit,
+                'amount'   => $request->amount,
+                'status'   => $request->filled('status')
+            ]);
+
+            notify()->success("Course create successfully.", "Success");
+            return redirect()->route('courses.index');
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            notify()->error("Course Create Failed.", "Error");
+            return back();
+        }
     }
 
     /**

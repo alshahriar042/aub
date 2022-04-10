@@ -35,15 +35,23 @@
         <li class="menu-header">Academic</li>
 
         <li class="dropdown">
-            <a href="{{ route('course.index') }}" class="menu-toggle nav-link">
+            <a href="{{ route('courses.index') }}" class="menu-toggle nav-link">
                 <i data-feather="life-buoy"></i><span>Courses</span></a>
             <ul class="dropdown-menu">
             </ul>
         </li>
 
         <li class="dropdown">
-            <a href="{{ route('advisors.index') }}" class="menu-toggle nav-link">
-                <i data-feather="heart"></i><span>Advisor</span></a>
+            <a href="{{ route('advised.index') }}" class="menu-toggle nav-link">
+                <i data-feather="heart"></i><span>Advised Course</span></a>
+            <ul class="dropdown-menu">
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="{{ route('advised.create') }}" class="menu-toggle nav-link">
+                <i data-feather="heart"></i><span>Advising</span></a>
             <ul class="dropdown-menu">
             </ul>
         </li>

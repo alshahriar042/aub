@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h4>Course Lists</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-primary" href="{{ route('course.create') }}">
+                                <a class="btn btn-primary" href="{{ route('courses.create') }}">
                                     <i class="fas fa-plus">&nbsp;</i> Create Course
                                 </a>
                             </div>
@@ -23,6 +23,7 @@
                                         <th class="text-center">#SL</th>
                                         <th class="text-center">Course Code</th>
                                         <th class="text-center">Course Name</th>
+                                        <th class="text-center">Faculty Name</th>
                                         <th class="text-center">Credit</th>
                                         <th class="text-center">Amount</th>
                                         <th class="text-center">Status</th>
@@ -33,16 +34,9 @@
                                     @foreach ($courses as $course)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>
-                                                <div class="form-row">
-
-                                                    <div class="col-sm">
-                                                        <div class="widget-heading">{{ $course->name }}</div>
-                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            <td class="text-center">{{ $course->name }}</td>
                                             <td class="text-center">{{ $course->code }}</td>
+                                            <td class="text-center">{{ @$course->user->name }}</td>
                                             <td class="text-center">{{ $course->credit}}</td>
                                             <td class="text-center">{{ $course->amount }}</td>
                                             <td class="text-center">

@@ -20,17 +20,17 @@
 
                         <div class="card-header justify-content-between">
                             <a href="#" style="float: left"></a>
-                            <a href="{{ route('course.index') }}" class="btn btn-danger btn-sm text-white"  style="float: right text-decoration: none;">
+                            <a href="{{ route('courses.index') }}" class="btn btn-danger btn-sm text-white"  style="float: right text-decoration: none;">
                                 <i class="fa fa-arrow-circle-left"></i>
                                 <span>Back to list</span>
                             </a>
                         </div>
 
-                        <form action="{{ route('course.store') }}" method="POST">
+                        <form action="{{ route('courses.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="name">Name</label>
+                                    <label for="name">Course Title</label>
                                     <input type="text" name="name" class="form-control" placeholder="Course name">
                                 </div>
                                 <div class="col-6">
@@ -38,6 +38,30 @@
 
                                     <input type="code" name="code" class="form-control" placeholder="Course Code">
                                 </div>
+
+                                <div class="col-6" >
+                                        <label for="batch">Department</label>
+                                        <select id="batch" class="form-control @error('department') is-invalid @enderror" name="department" autofocus>
+                                            <option value="">Select Batch</option>
+                                            @foreach($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                </div>
+
+                                <div class="col-6" >
+                                    <label for="batch">Teachers</label>
+                                    <select id="batch" class="form-control @error('teacher') is-invalid @enderror" name="teacher" autofocus>
+                                        <option value="">Select Couser Teacher</option>
+                                        @foreach($teachers as $teacher)
+                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                            </div>
+
+
 
                                 <div class="col-6">
                                     <label for="credit">Credit</label>
@@ -51,13 +75,8 @@
                                 </div>
 
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-4 text-center">
-                                    <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
 
-                                </div>
-                            </div>
-
+                                   <br>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" name="status" id="status" {{ @$course->status == true ? 'checked' : ''}}>
@@ -69,6 +88,13 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-4 text-center">
+                                    <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
+
+                                </div>
                             </div>
                     </div>
 

@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h4>Advisor Lists</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-primary" href="{{ route('advisors.create') }}">
+                                <a class="btn btn-primary" href="{{ route('advised.create') }}">
                                     <i class="fas fa-plus">&nbsp;</i> Create Advisor
                                 </a>
                             </div>

@@ -70,7 +70,7 @@ class UserController extends Controller
                 'email'      => 'required|string|email|max:255|unique:users',
                 'password'   => 'required|confirmed|string|min:8',
                 'gender'     => 'required',
-                'department' => 'required',
+                'dept_id' => 'required',
                 'batch'      => 'required',
                 'avatar'     => 'required|image',
                 'role'       => 'required',
@@ -84,7 +84,7 @@ class UserController extends Controller
                 'email'      => 'required|string|email|max:255|unique:users',
                 'password'   => 'required|confirmed|string|min:8',
                 'gender'     => 'required',
-                'department' => 'required',
+                'dept_id' => 'required',
                 'avatar'     => 'required|image',
                 'role'       => 'required',
                 'status'     => 'required'
@@ -101,7 +101,7 @@ class UserController extends Controller
                 'email'         => $request->email,
                 'password'      => Hash::make($request->password),
                 'gender'        => $request->gender,
-                'department_id' => $request->department,
+                'dept_id'       => $request->department,
                 'batch_id'      => $request->batch ? $request->batch : NULL,
                 'user_id'       => $user_id,
                 'status'        => $request->filled('status')

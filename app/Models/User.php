@@ -38,7 +38,7 @@ class User extends Authenticatable implements HasMedia
         'address',
         'user_id',
         'batch_id',
-        'department_id'
+        'dept_id'
     ];
 
     /**
@@ -80,7 +80,10 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsTo(Department::class);
     }
-
+    public function courses()
+    {
+        return $this->hasMany(Course::class,'teacher_id','id');
+    }
     public function hasPermission($permission): bool
     {
         return $this->role->permissions()->where('slug', $permission)->first() ? true : false;

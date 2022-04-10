@@ -10,4 +10,9 @@ class Course extends Model
     protected $guarded = ['id'];
 
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'teacher_id','id');
+    }
 }

@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Backend\AdvisedController as BackendAdvisedController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\BackEnd\CourseController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
 use App\Http\Controllers\BackEnd\BatchController;
-use App\Http\Controllers\BackEnd\AdvisorController;
+use App\Http\Controllers\BackEnd\AdvisedController;
+use App\Http\Controllers\BackEnd\CourseController as BackEndCourseController;
 use App\Http\Controllers\BackEnd\ProfileController;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
@@ -43,10 +45,12 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
     Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
 
-    /* *************** Course *************** */
-    Route::get('course-list',[CourseController::class,'index'])->name('course.index');
-    Route::get('course-create',[CourseController::class,'create'])->name('course.create');
-    Route::post('course-store',[CourseController::class,'store'])->name('course.store');
+    // /* *************** Course *************** */
+    // Route::get('course-list',[CourseController::class,'index'])->name('course.index');
+    // Route::get('course-create',[CourseController::class,'create'])->name('course.create');
+    // Route::post('course-store',[CourseController::class,'store'])->name('course.store');
+
+    Route::resource('courses',CourseController::class);
 
     /* *************** Department *************** */
     Route::resource('departments',DepartmentController::class);
@@ -54,6 +58,6 @@ Route::group(['middleware'=>'auth'],function(){
     /* *************** Batch *************** */
     Route::resource('batchs',BatchController::class);
 
-    /* *************** Advisor *************** */
-    Route::resource('advisors',AdvisorController::class);
+    /* *************** Advising *************** */
+    Route::resource('advised',AdvisedController::class);
 });
