@@ -96,15 +96,15 @@ class UserController extends Controller
             $user_id = date("Ym").rand(100,999);
 
             $user = User::create([
-                'role_id'    => $request->role,
-                'name'       => $request->name,
-                'email'      => $request->email,
-                'password'   => Hash::make($request->password),
-                'gender'     => $request->gender,
+                'role_id'       => $request->role,
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->password),
+                'gender'        => $request->gender,
                 'department_id' => $request->department,
                 'batch_id'      => $request->batch ? $request->batch : NULL,
-                'user_id'    => $user_id,
-                'status'     => $request->filled('status')
+                'user_id'       => $user_id,
+                'status'        => $request->filled('status')
             ]);
 
             if ($request->hasFile('avatar')) {
@@ -142,7 +142,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         Gate::authorize('users.edit');
-
+        // return $user;
         $roles       = Role::all();
         $batchs      = Batch::all();
         $departments = Department::all();

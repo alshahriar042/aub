@@ -111,7 +111,7 @@
                                                     <label for="gender">Gender</label>
                                                     <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" autofocus>
                                                         <option value="">Select Gender</option>
-                                                        <option value="female" {{ @$user->gender == "female" ? 'selected' : ''}}>Male</option>
+                                                        <option value="female" {{ @$user->gender == "female" ? 'selected' : ''}}>Female</option>
                                                         <option value="male" {{ @$user->gender == "male" ? 'selected' : ''}}>Male</option>
                                                         <option value="others" {{ @$user->gender == "others" ? 'selected' : ''}}>Other's</option>
                                                     </select>
@@ -127,8 +127,8 @@
                                                     <div class="col-md-3" style="padding: 0px">
                                                         <div class="form-group">
                                                             <label for="gender">User Type</label><br>
-                                                            <input type="radio" id="student" name="user_type" value="student"> Student&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <input type="radio" id="teacher" name="user_type" value="teacher"> Teacher
+                                                            <input type="radio" id="student" name="user_type" value="student" {{ (@$user->role_id == 3)? "checked" : "" }}> Student&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" id="teacher" name="user_type" value="teacher" {{ (@$user->role_id == 2)? "checked" : "" }}> Teacher
                                                         </div>
                                                     </div>
 
@@ -138,7 +138,7 @@
                                                             <select id="batch" class="form-control @error('batch') is-invalid @enderror" name="batch" autofocus>
                                                                 <option value="">Select Batch</option>
                                                                 @foreach($batchs as $batch)
-                                                                <option value="{{ $batch->id }}" {{ @$user->batch->id == $batch->id ? 'selected' : ''}}>{{ $batch->name }}</option>
+                                                                <option value="{{ $batch->id }}" {{ @$user->batch_id == $batch->id ? 'selected' : ''}}>{{ $batch->name }}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -181,7 +181,7 @@
                                                     <select id="department" class="form-control select2 @error('department') is-invalid @enderror" name="department" autofocus>
                                                         <option value="">Select Department</option>
                                                         @foreach($departments as $department)
-                                                        <option value="{{ $department->id }}" {{ @$user->department->id == $department->id ? 'selected' : ''}}>{{ $department->name }}</option>
+                                                        <option value="{{ $department->id }}" {{ @$user->department_id == $department->id ? 'selected' : ''}}>{{ $department->name }}</option>
                                                         @endforeach
                                                     </select>
 
@@ -241,17 +241,40 @@
     {{-- image --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     <script>
-        $('.dropify').dropify();
-        $('.js-example-basic-single').select2();
+        // $('.dropify').dropify();
+        // $('.js-example-basic-single').select2();
 
-        $("#batch_data").hide();
+        // $("#batch_data").hide();
 
-        $("#student").click(function(){
-            $("#batch_data").show();
-        });
+        // $("#student").click(function(){
+        //     $("#batch_data").show();
+        // });
 
-        $("#teacher").click(function(){
-            $("#batch_data").hide();
+        // $("#teacher").click(function(){
+        //     $("#batch_data").hide();
+        // });
+
+        $(document).ready(function () {
+            $('.dropify').dropify();
+            $('.js-example-basic-single').select2();
+
+            // $("#batch_data").hide();
+
+            if ($("#student").is(":checked")) {
+                $('#batch_data').show();
+            }
+            else if ($("#teacher").is(":checked")) {
+                $('#batch_data').hide();
+            }
+
+            $("#student, #teacher").change(function () {
+                if ($("#student").is(":checked")) {
+                    $('#batch_data').show();
+                }
+                else if ($("#teacher").is(":checked")) {
+                    $('#batch_data').hide();
+                }
+            });
         });
     </script>
 @endsection

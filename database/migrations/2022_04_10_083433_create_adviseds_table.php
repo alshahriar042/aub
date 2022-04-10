@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdvisorsTable extends Migration
+class CreateAdvisedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateAdvisorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('advisors', function (Blueprint $table) {
+        Schema::create('adviseds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('student_id');
-            $table->string('credit');
-            $table->string('semister');
-            $table->integer('course_id');
-            $table->integer('fee');
+            $table->foreignId('student_id')->onDelete('cascade')->nullable();
+            $table->foreignId('teacher_id')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateAdvisorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advisors');
+        Schema::dropIfExists('adviseds');
     }
 }
