@@ -27,7 +27,7 @@
                                         <th class="text-center">Credit</th>
                                         <th class="text-center">Amount</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Joined At</th>
+                                        <th class="text-center">Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
