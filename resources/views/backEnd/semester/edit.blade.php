@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card card-primary rounded-0">
                     <div class="card-body text-center">
-                        <h4 class="mb-0">Current Semester Create</h4>
+                        <h4 class="mb-0">Current Semester Update</h4>
                     </div>
                 </div>
             </div>
@@ -26,8 +26,10 @@
                             </a>
                         </div>
 
-                        <form action="{{ route('semesters.store') }}" method="POST">
+                        <form action="{{ route('semesters.update',$semester->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
+
 
                             <div class="row align-items-center">
                             <div class="col-6" >

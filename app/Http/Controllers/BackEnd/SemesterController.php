@@ -18,7 +18,8 @@ class SemesterController extends Controller
      */
     public function index()
     {
-        //
+        $semesters= Semester::orderBy('id')->get();
+        return view('backEnd.semester.index',compact('semesters'));
     }
 
     /**
@@ -40,7 +41,7 @@ class SemesterController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'semester' => 'required|string|max:255|unique:departments',
+            'semester' => 'required',
         ]);
 
         try {
@@ -49,7 +50,7 @@ class SemesterController extends Controller
             ]);
 
             notify()->success("Semester create successfully.", "Success");
-            return redirect()->route('semesters.create');
+            return redirect()->route('semesters.index');
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
@@ -78,7 +79,9 @@ class SemesterController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $semester = Semester::findOrFail($id);
+        return view('backEnd.semester.edit',compact('semester'));
     }
 
     /**
@@ -90,7 +93,26 @@ class SemesterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $semester = Semester::findOrFail($id);
+
+        $this->validate($request,[
+            'semester' => 'required',
+        ]);
+
+        try {
+            $semester->update([
+                'currentSemester' => $request->semester,
+            ]);
+
+            notify()->success("Semester Update successfully.", "Success");
+            return redirect()->route('semesters.index');
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            notify()->error("Semester Update Failed.", "Error");
+            return back();
+        }
     }
 
     /**
@@ -101,6 +123,9 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Semester::findOrFail($id)->delete();
+
+        notify()->success("Semester delete successfully.", "Success");
+        return back();
     }
 }
