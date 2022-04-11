@@ -49,8 +49,8 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::updateOrCreate([
-            'name'      => 'User',
-            'slug'      => 'user',
+            'name'      => 'Student',
+            'slug'      => 'student',
             'deletable' => false
         ]);
     }

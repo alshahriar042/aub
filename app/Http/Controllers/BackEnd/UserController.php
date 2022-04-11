@@ -64,32 +64,17 @@ class UserController extends Controller
     {
         Gate::authorize('users.create');
 
-        if ($request->user_type == "student") {
-            $this->validate($request,[
-                'name'       => 'required|string|max:255',
-                'email'      => 'required|string|email|max:255|unique:users',
-                'password'   => 'required|confirmed|string|min:8',
-                'gender'     => 'required',
-                'dept_id' => 'required',
-                'batch'      => 'required',
-                'avatar'     => 'required|image',
-                'role'       => 'required',
-                'status'     => 'required'
-            ]);
-        }
-
-        if ($request->user_type == "teacher") {
-            $this->validate($request,[
-                'name'        => 'required|string|max:255',
-                'email'      => 'required|string|email|max:255|unique:users',
-                'password'   => 'required|confirmed|string|min:8',
-                'gender'     => 'required',
-                'dept_id' => 'required',
-                'avatar'     => 'required|image',
-                'role'       => 'required',
-                'status'     => 'required'
-            ]);
-        }
+        $this->validate($request,[
+            'name'       => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users',
+            'password'   => 'required|confirmed|string|min:8',
+            'gender'     => 'required',
+            'department' => 'required',
+            'batch'      => $request->user_type == "student" ? 'required' : '',
+            'avatar'     => 'required|image',
+            'role'       => 'required',
+            'status'     => 'required'
+        ]);
 
         try {
 
