@@ -19,8 +19,10 @@
                     <img class="rounded-circle author-box-picture" src="{{ $user->getFirstMediaUrl('avatar') != null ? $user->getFirstMediaUrl('avatar') : config('app.placeholder').'160.png' }}" alt="User Avatar">
                     <div class="clearfix"></div><br>
                     <div class="author-box-name">
-                        <span style="color: #6777ef">{{ $user->name }}</span>
-                        {{-- <a href="#">{{ $user->name }}</a> --}}
+                        <span style="color: #6777ef">{{ $user->name }}</span><br>
+                        @if ($user->role_id == 2 || $user->role_id == 3)
+                            <span style="font-size: 15px;"><b>ID: {{ $user->user_id }}</b></span>
+                        @endif
                     </div><br>
                     <div>
                         <p class="clearfix">
@@ -28,13 +30,29 @@
                             <span class="float-right text-muted">{{ $user->role->name }}</span>
                         </p>
                         <p class="clearfix">
+                            <span class="float-left">E-Mail</span>
+                            <span class="float-right text-muted">{{ $user->email }}</span>
+                        </p>
+                        <p class="clearfix">
                             <span class="float-left">Phone</span>
                             <span class="float-right text-muted">{{ $user->phone }}</span>
                         </p>
                         <p class="clearfix">
-                            <span class="float-left">E-Mail</span>
-                            <span class="float-right text-muted">{{ $user->email }}</span>
+                            <span class="float-left">Gender</span>
+                            <span class="float-right text-muted">{{ ucwords($user->gender) }}</span>
                         </p>
+
+                        @if ($user->role_id == 3)
+                        <p class="clearfix">
+                            <span class="float-left">Father's Name</span>
+                            <span class="float-right text-muted">{{ $user->fathers_name }}</span>
+                        </p>
+                        <p class="clearfix">
+                            <span class="float-left">Mother's Name</span>
+                            <span class="float-right text-muted">{{ $user->mothers_name }}</span>
+                        </p>
+                        @endif
+
                         <p class="clearfix">
                             <span class="float-left">Join</span>
                             <span class="float-right text-muted">{{ date('d-M-Y',strtotime($user->created_at)) }}</span>
@@ -65,7 +83,7 @@
                     <div class="row">
                         <div class="form-group col-md-12 col-12">
                             <label>Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}" placeholder="Enter your name">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ @$user->name }}" placeholder="Enter your name">
 
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -75,7 +93,7 @@
                         </div>
                         <div class="form-group col-md-6 col-12">
                             <label>Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control @error('name') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" placeholder="Enter your e-mail">
+                            <input type="email" class="form-control @error('name') is-invalid @enderror" name="email" value="{{ @$user->email }}" placeholder="Enter your e-mail">
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -86,13 +104,29 @@
 
                         <div class="form-group col-md-6 col-12">
                             <label>Phone</label>
-                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ Auth::user()->phone }}" placeholder="Enter your phone">
+                            <input type="tel" class="form-control" name="phone" value="{{ @$user->phone }}" placeholder="Enter your phone">
+                        </div>
 
-                            @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        @if ($user->role_id == 3)
+                            <div class="form-group col-md-6 col-12">
+                                <label>Father's Name</label>
+                                <input type="text" class="form-control" name="fathers_name" value="{{ @$user->fathers_name }}" placeholder="Enter your father's name">
+                            </div>
+
+                            <div class="form-group col-md-6 col-12">
+                                <label>Mother's Name</label>
+                                <input type="text" class="form-control" name="mothers_name" value="{{ @$user->mothers_name }}" placeholder="Enter your mother's name">
+                            </div>
+                        @endif
+
+                        <div class="form-group col-md-12 col-12">
+                            <label>Gender</label>
+                            <select id="gender" class="form-control" name="gender" autofocus>
+                                <option value="">Select Gender</option>
+                                <option value="female" {{ @$user->gender == "female" ? 'selected' : ''}}>Female</option>
+                                <option value="male" {{ @$user->gender == "male" ? 'selected' : ''}}>Male</option>
+                                <option value="others" {{ @$user->gender == "others" ? 'selected' : ''}}>Other's</option>
+                            </select>
                         </div>
 
                         <div class="form-group col-md-12 col-12">
