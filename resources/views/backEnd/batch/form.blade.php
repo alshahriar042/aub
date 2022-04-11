@@ -36,7 +36,7 @@
                                             <div class="card-body" style="padding: 10px;">
                                                 <h5 class="card-title">Batch Info</h5>
                                                 <div class="form-group">
-                                                    <label for="name">Name</label>
+                                                    <label for="name">Batch Number</label>
                                                     <input id="name" type="number" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $batch->name ?? old('name') }}" placeholder="Enter batch number" autofocus>
 
                                                     @error('name')

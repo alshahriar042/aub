@@ -1,6 +1,6 @@
 @extends('backEnd.layouts.app')
 
-@section('title', 'batchs Lists | AUB')
+@section('title', 'Batchs Lists | AUB')
 
 @section('content')
     <div class="section-body">
@@ -21,7 +21,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">#SL</th>
-                                        <th class="text-center">Batch Name</th>
+                                        <th class="text-center">Batch Number</th>
                                         <th class="text-center">Created At</th>
                                         <th class="text-center">Action</th>
                                     </tr>
