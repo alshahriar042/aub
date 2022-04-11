@@ -181,7 +181,7 @@
                                                     <select id="department" class="form-control select2 @error('department') is-invalid @enderror" name="department" autofocus>
                                                         <option value="">Select Department</option>
                                                         @foreach($departments as $department)
-                                                        <option value="{{ $department->id }}" {{ @$user->department_id == $department->id ? 'selected' : ''}}>{{ $department->name }}</option>
+                                                        <option value="{{ $department->id }}" {{ @$user->dept_id == $department->id ? 'selected' : ''}}>{{ $department->name }}</option>
                                                         @endforeach
                                                     </select>
 

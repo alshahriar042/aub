@@ -38,9 +38,9 @@ class UserSeeder extends Seeder
         ]);
 
         User::updateOrCreate([
-            'role_id'  => Role::where('slug','user')->first()->id,
-            'name'     => 'User',
-            'email'    => 'user@app.com',
+            'role_id'  => Role::where('slug','student')->first()->id,
+            'name'     => 'Student',
+            'email'    => 'student@app.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'status'   => true,
