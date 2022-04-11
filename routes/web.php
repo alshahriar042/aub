@@ -8,10 +8,10 @@ use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
 use App\Http\Controllers\BackEnd\BatchController;
 use App\Http\Controllers\BackEnd\AdvisedController;
-use App\Http\Controllers\BackEnd\CourseController as BackEndCourseController;
 use App\Http\Controllers\BackEnd\ProfileController;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
+use App\Http\Controllers\BackEnd\SemesterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +60,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     /* *************** Advising *************** */
     Route::resource('advised',AdvisedController::class);
+
+    Route::resource('semesters',SemesterController::class);
+
 });

@@ -42,9 +42,7 @@
                                                     <td class="text-left">{{$loop->index +1  }}</td>
                                                     <td class="text-left"> {{ $course->code }}</td>
                                                     <td class="text-left">{{ $course->name }}</td>
-                                                    <td class="text-left">
-
-                                                    </td>
+                                                    <td class="text-left">{{ $course->user->name }}</td>
 
                                                     <td class="text-left">
 

@@ -72,6 +72,13 @@
             </ul>
         </li>
 
+        <li class="dropdown">
+            <a href="{{ route('semesters.create') }}" class="menu-toggle nav-link">
+                <i data-feather="package"></i><span>Semester setup</span></a>
+            <ul class="dropdown-menu">
+            </ul>
+        </li>
+
       </ul>
     </aside>
   </div>
