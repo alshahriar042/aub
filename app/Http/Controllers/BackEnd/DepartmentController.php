@@ -6,6 +6,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class DepartmentController extends Controller
 {
@@ -16,6 +17,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+        Gate::authorize('departments.index');
+
         $departments = Department::all();
         return view('backEnd.department.index',compact('departments'));
     }
@@ -27,6 +30,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
+        Gate::authorize('departments.create');
+
         return view('backEnd.department.form');
     }
 
@@ -38,6 +43,8 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('departments.create');
+
         $this->validate($request,[
             'name' => 'required|string|max:255|unique:departments',
         ]);
@@ -78,6 +85,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('departments.edit');
+
         $department = Department::findOrFail($id);
         return view('backEnd.department.form',compact('department'));
     }
@@ -91,6 +100,8 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('departments.edit');
+
         $department = Department::findOrFail($id);
 
         $this->validate($request,[
@@ -121,6 +132,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('departments.destroy');
+
         Department::findOrFail($id)->delete();
 
         notify()->success("Department delete successfully.", "Success");

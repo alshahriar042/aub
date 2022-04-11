@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\BackEnd;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class CourseController extends Controller
 {
@@ -18,6 +19,8 @@ class CourseController extends Controller
      */
     public function index()
     {
+        Gate::authorize('courses.index');
+
         $courses = Course::all();
         return view('backEnd.course.index', compact('courses'));    }
 
@@ -28,6 +31,8 @@ class CourseController extends Controller
      */
     public function create()
     {
+        Gate::authorize('courses.create');
+
         $departments= Department::orderBy('id')->get();
         $teachers = User::where('role_id',2)->get();
 
@@ -42,13 +47,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //  dd($request->all());
+        Gate::authorize('courses.create');
+
         $this->validate($request,[
             'code'  => 'required',
-            'name' => 'required',
-            'credit' => 'required',
+            'name'   => 'required',
+            'credit'   => 'required',
             'teacher_id' => 'teacher',
-            'amount' => 'required',
+            'amount'      => 'required',
 
         ]);
 
@@ -93,7 +99,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        Gate::authorize('courses.edit');
     }
 
     /**
@@ -105,7 +111,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Gate::authorize('courses.edit');
     }
 
     /**
@@ -116,6 +122,6 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gate::authorize('courses.destroy');
     }
 }

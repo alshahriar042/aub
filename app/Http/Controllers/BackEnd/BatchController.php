@@ -6,6 +6,7 @@ use App\Models\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class BatchController extends Controller
 {
@@ -16,6 +17,8 @@ class BatchController extends Controller
      */
     public function index()
     {
+        Gate::authorize('batchs.index');
+
         $batchs = Batch::all();
         return view('backEnd.batch.index',compact('batchs'));
     }
@@ -27,6 +30,8 @@ class BatchController extends Controller
      */
     public function create()
     {
+        Gate::authorize('batchs.create');
+
         return view('backEnd.batch.form');
     }
 
@@ -38,6 +43,8 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('batchs.create');
+
         $this->validate($request,[
             'name' => 'required|numeric|min:1|max:3|unique:batches',
         ]);
@@ -77,6 +84,8 @@ class BatchController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('batchs.edit');
+
         $batch = Batch::findOrFail($id);
         return view('backEnd.batch.form',compact('batch'));
     }
@@ -90,6 +99,8 @@ class BatchController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('batchs.edit');
+
         $batch = Batch::findOrFail($id);
 
         $this->validate($request,[
@@ -120,6 +131,8 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('batchs.destroy');
+
         Batch::findOrFail($id)->delete();
 
         notify()->success("Batch delete successfully.", "Success");
