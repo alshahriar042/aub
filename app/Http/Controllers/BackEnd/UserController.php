@@ -147,11 +147,14 @@ class UserController extends Controller
         Gate::authorize('users.edit');
 
         $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'email'  => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'nullable|confirmed|string|min:8',
-            'avatar' => 'nullable|image',
-            'role' => 'required'
+            'name'       => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password'   => 'nullable|confirmed|string|min:8',
+            'gender'     => 'required',
+            'department' => 'required',
+            'batch'      => $request->user_type == "student" ? 'required' : '',
+            'avatar'     => 'nullable|image',
+            'role'       => 'required'
         ]);
 
         try{
@@ -160,6 +163,9 @@ class UserController extends Controller
                 'name'     => $request->name,
                 'email'    => $request->email,
                 'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
+                'gender'   => $request->gender,
+                'dept_id'  => $request->department,
+                'batch_id' => $request->batch ? $request->batch : NULL,
                 'status'   => $request->filled('status')
             ]);
 

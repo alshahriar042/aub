@@ -28,9 +28,12 @@ class ProfileController extends Controller
         try {
             $user_id = Auth::user()->id;
             $user = User::findOrFail($user_id);
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
+            $user->name         = $request->name;
+            $user->email        = $request->email;
+            $user->phone        = $request->phone;
+            $user->fathers_name = $request->fathers_name;
+            $user->mothers_name = $request->mothers_name;
+            $user->gender       = $request->gender;
 
             if ($request->hasFile('avatar')) {
                 $user->addMedia($request->avatar)->toMediaCollection('avatar');
