@@ -45,11 +45,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
     Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
 
-    // /* *************** Course *************** */
-    // Route::get('course-list',[CourseController::class,'index'])->name('course.index');
-    // Route::get('course-create',[CourseController::class,'create'])->name('course.create');
-    // Route::post('course-store',[CourseController::class,'store'])->name('course.store');
-
+    /* *************** Course *************** */
     Route::resource('courses',CourseController::class);
 
     /* *************** Department *************** */
@@ -61,6 +57,7 @@ Route::group(['middleware'=>'auth'],function(){
     /* *************** Advising *************** */
     Route::resource('advised',AdvisedController::class);
 
+    /* *************** Semester *************** */
     Route::resource('semesters',SemesterController::class);
 
 });

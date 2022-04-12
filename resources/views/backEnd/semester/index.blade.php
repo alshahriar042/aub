@@ -1,6 +1,6 @@
 @extends('backEnd.layouts.app')
 
-@section('title', 'semester Lists | AUB')
+@section('title', 'Semester Lists | AUB')
 
 @section('content')
     <div class="section-body">
@@ -30,7 +30,7 @@
                                     @foreach ($semesters as $semester)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $semester->currentSemester }}</td>
+                                            <td class="text-center">{{ ucwords($semester->currentSemester) }}</td>
                                             <td class="text-center">{{ $semester->created_at->diffForHumans() }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('semesters.edit',$semester->id) }}" class="btn btn-success btn-sm" title="Edit">

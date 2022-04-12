@@ -29,7 +29,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
-        return view('backEnd.semester.create');
+        return view('backEnd.semester.form');
     }
 
     /**
@@ -81,7 +81,7 @@ class SemesterController extends Controller
     {
 
         $semester = Semester::findOrFail($id);
-        return view('backEnd.semester.edit',compact('semester'));
+        return view('backEnd.semester.form',compact('semester'));
     }
 
     /**

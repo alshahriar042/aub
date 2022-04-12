@@ -139,7 +139,7 @@
                                                     </div><br>
 
                                                     @error('status')
-                                                        <span class="text-danger" role="alert">
+                                                        <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
