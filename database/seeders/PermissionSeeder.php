@@ -153,6 +153,32 @@ class PermissionSeeder extends Seeder
             'slug'      => 'courses.destroy'
         ]);
 
+        /* ********* semesters permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'Semester Managemant']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access Semester',
+            'slug'      => 'semesters.index'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Create Semester',
+            'slug'      => 'semesters.create'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Edit Semester',
+            'slug'      => 'semesters.edit'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Delete Semester',
+            'slug'      => 'semesters.destroy'
+        ]);
+
 
 
 
