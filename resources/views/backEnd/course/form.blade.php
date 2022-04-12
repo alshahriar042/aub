@@ -134,7 +134,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-switch" style="padding: 0px;">
-                                                        <input type="checkbox" class="custom-control-input" name="status" id="status" {{ @$course->status == true ? 'checked' : ''}}>
+                                                        <input type="checkbox" class="custom-control-input" name="status" id="status" {{ @$course->status == true ? 'checked' : 'checked'}}>
                                                         <label class="custom-control-label" for="status" style="margin-left: 35px;">Status</label>
                                                     </div><br>
 
