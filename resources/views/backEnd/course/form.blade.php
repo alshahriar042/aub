@@ -55,7 +55,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="code">Course Code</label>
-                                                    <input id="code" type="number" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ $course->code ?? old('code') }}" placeholder="Enter code" autofocus>
+                                                    <input id="code" type="text" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ $course->code ?? old('code') }}" placeholder="Enter code" autofocus>
 
                                                     @error('code')
                                                         <span class="invalid-feedback" role="alert">
