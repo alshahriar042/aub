@@ -33,10 +33,10 @@ class CourseController extends Controller
     {
         Gate::authorize('courses.create');
 
-        $departments= Department::orderBy('id')->get();
-        $teachers = User::where('role_id',2)->get();
+        $departments = Department::orderBy('id')->get();
+        $teachers    = User::where('role_id',2)->get();
 
-        return view('backEnd.course.create',compact('departments','teachers'));
+        return view('backEnd.course.form',compact('departments','teachers'));
     }
 
     /**
@@ -50,23 +50,23 @@ class CourseController extends Controller
         Gate::authorize('courses.create');
 
         $this->validate($request,[
-            'code'  => 'required',
-            'name'   => 'required',
-            'credit'   => 'required',
-            'teacher_id' => 'teacher',
-            'amount'      => 'required',
-
+            'code'       => 'required',
+            'name'       => 'required',
+            'credit'     => 'required',
+            'teacher'    => 'required',
+            'amount'     => 'required',
+            'department' => 'required',
         ]);
 
         try {
-            $user = Course::create([
-                'dept_id'  => $request->department,
-                'teacher_id'  => $request->teacher,
-                'code'     => $request->code,
-                'name'     => $request->name,
-                'credit'   => $request->credit,
-                'amount'   => $request->amount,
-                'status'   => $request->filled('status')
+            Course::create([
+                'dept_id'    => $request->department,
+                'teacher_id' => $request->teacher,
+                'code'       => $request->code,
+                'name'       => $request->name,
+                'credit'     => $request->credit,
+                'amount'     => $request->amount,
+                'status'     => $request->filled('status')
             ]);
 
             notify()->success("Course create successfully.", "Success");
@@ -100,6 +100,12 @@ class CourseController extends Controller
     public function edit($id)
     {
         Gate::authorize('courses.edit');
+
+        $course      = Course::findOrFail($id);
+        $teachers    = User::where('role_id',2)->get();
+        $departments = Department::orderBy('id')->get();
+
+        return view('backEnd.course.form',compact('departments','teachers','course'));
     }
 
     /**
@@ -112,6 +118,38 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         Gate::authorize('courses.edit');
+
+        $course = Course::findOrFail($id);
+
+        $this->validate($request,[
+            'code'       => 'required',
+            'name'       => 'required',
+            'credit'     => 'required',
+            'teacher'    => 'required',
+            'amount'     => 'required',
+            'department' => 'required',
+        ]);
+
+        try {
+            $course->update([
+                'dept_id'    => $request->department,
+                'teacher_id' => $request->teacher,
+                'code'       => $request->code,
+                'name'       => $request->name,
+                'credit'     => $request->credit,
+                'amount'     => $request->amount,
+                'status'     => $request->filled('status')
+            ]);
+
+            notify()->success("Course update successfully.", "Success");
+            return redirect()->route('courses.index');
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            notify()->error("Course Update Failed.", "Error");
+            return back();
+        }
     }
 
     /**
@@ -123,5 +161,11 @@ class CourseController extends Controller
     public function destroy($id)
     {
         Gate::authorize('courses.destroy');
+
+        $course = Course::findOrFail($id);
+        $course->delete();
+
+        notify()->success("Course delete successfully.", "Success");
+        return back();
     }
 }
