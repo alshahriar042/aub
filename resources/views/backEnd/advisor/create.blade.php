@@ -13,12 +13,33 @@
                     <div class="card-body">
                                          <div class="form-row align-items-center">
                             <div class="table-responsive">
-                                <form id="form_check">
+                                <form method="POST" action="{{ route('advised.store') }}">
+                                    @csrf
+
+
+                                    <div class="col-md-6" style="padding: 0px; width: 100%" >
+                                        <div class="form-group" id="batch_data">
+                                            <label for="batch">Student</label>
+                                            <select id="batch" class="form-control @error('batch') is-invalid @enderror" name="student" required autofocus>
+                                                <option value="">Select Student</option>
+                                                @foreach($students as $student)
+                                                <option value="{{ $student->id }}">{{ $student->name }} </option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('student')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
                                     <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th width="2%"><input name="checkbox" onclick='checkedAll();'
-                                                        type="checkbox" readonly="readonly" title="Select All" /></th>
+                                                <th></th>
                                                 <th class="text-left">SL</th>
                                                 <th class="text-left">Course Code</th>
                                                 <th class="text-left">Course Title</th>
@@ -27,51 +48,46 @@
                                                 <th class="text-left">Available seat</th>
                                                 <th class="text-left">Credit</th>
                                                 <th class="text-left">Amount</th>
-                                                <th class="text-left">Created At</th>
-                                                {{-- <th class="text-center">Action</th> --}}
-                                            </tr>
+                                                </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($courses as $course )
                                                 <tr>
 
-                                                    <td align="left" valign="top"><input type="checkbox" name="summe_code[]"
-
-                                                            title="Single Select" />
+                                                    <td>
+                                                        <input type="checkbox" name="course_id[]" value="{{ $course->id }}_{{ $course->credit }}_{{ $course->amount }}"   title="Single Select" />
                                                     </td>
                                                     <td class="text-left">{{$loop->index +1  }}</td>
                                                     <td class="text-left"> {{ $course->code }}</td>
                                                     <td class="text-left">{{ $course->name }}</td>
                                                     <td class="text-left">{{ $course->user->name }}</td>
 
-                                                    <td class="text-left">
+                                                    <td class="text-left">               </td>
+                                                    <td class="text-left">               </td>
 
+                                                    <td class="text-left">   {{ $course->credit }}       </td>
+                                                    <td class="text-left">   {{ $course->amount }}       </td>
 
-
-                                                    </td>
-                                                    <td class="text-left">
-
-
-                                                        </td>
-
-                                                    <td class="text-left">
-
+                                                     {{-- <td class="text-left">
+                                                       <input type="text" name="credit[]" value="{{ $course->credit }}">
                                                     </td>
 
-                                                    <td class="text-left">
 
+                                                     <td class="text-left">
+                                                        <input type="text" name="fee[]" value="{{ $course->amount }} ">
 
-
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                    </td>
-
+                                                    </td> --}}
 
                                                 </tr>
-                                                @endforeach
+                                             @endforeach
                                         </tbody>
                                     </table>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-arrow-circle-up"></i>
+                                            <span>Save </span>
+                                        </button>
+                                    </div>
                                 </form>
 
                             </div>
