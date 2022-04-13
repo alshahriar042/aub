@@ -45,7 +45,7 @@
             </li>
 
             <li class="dropdown">
-                <a href="{{ route('advised.index') }}" class="menu-toggle nav-link">
+                <a href="{{ route('mycourse') }}" class="menu-toggle nav-link">
                     <i data-feather="heart"></i><span>My Courses</span>
                 </a>
             </li>

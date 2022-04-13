@@ -20,4 +20,9 @@ class Course extends Model
     {
         return $this->belongsTo(Department::class,'dept_id','id');
     }
+
+    public function advisedcourses()
+    {
+        return $this->belongsTo(AdvisedCourse::class,'id','course_id');
+    }
 }

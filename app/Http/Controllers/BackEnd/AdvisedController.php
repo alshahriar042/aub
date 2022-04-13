@@ -71,7 +71,7 @@ class AdvisedController extends Controller
             }
 
             notify()->success("Advised create successfully.", "Success");
-            return redirect()->route('batchs.index');
+            return redirect()->route('advised.index');
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

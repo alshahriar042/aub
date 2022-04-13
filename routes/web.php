@@ -32,6 +32,7 @@ Auth::routes();
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/home', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/my-course', [DashboardController::class,'mycourse'])->name('mycourse');
 
     /* *************** Role *************** */
     Route::resource('roles',RoleController::class);
