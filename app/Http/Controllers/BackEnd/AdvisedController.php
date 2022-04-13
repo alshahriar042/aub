@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\Auth;
 
+use function GuzzleHttp\Promise\each;
+
 class AdvisedController extends Controller
 {
     /**
@@ -45,32 +47,38 @@ class AdvisedController extends Controller
      */
     public function store(Request $request)
     {
+        try {
 
-       $a= implode ("-", $request->course_id);
-        dd($a);
+            $advised = Advised::create([
+                'student_id' => $request->student,
+                'teacher_id' => Auth::user()->id,
+            ]);
 
+            $all_datas = $request->course_id;
+            if (!empty($all_datas)) {
+                foreach ($all_datas as $key => $data) {
+                    $new_datas = explode(",",$data);
 
-        // try {
-        //   $id=   Advised::create([
-        //         'student_id' => $request->student,
-        //         'teacher_id' => Auth::user()->id,
-        //     ]);
+                    $all_course_val = [
+                        'advised_id' => $advised->id,
+                        'course_id'  => $new_datas[0],
+                        'credit'     => $new_datas[1],
+                        'fee'        => $new_datas[2],
+                        'semister'   => "summer-2022"
+                    ];
+                    AdvisedCourse::create($all_course_val);
+                }
+            }
 
-        //     AdvisedCourse::create([
+            notify()->success("Advised create successfully.", "Success");
+            return redirect()->route('batchs.index');
 
-        //     ])
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
 
-        //     // dd($id->id);
-
-        //     notify()->success("Advised create successfully.", "Success");
-        //     return redirect()->route('batchs.index');
-
-        // } catch (\Throwable $th) {
-        //     Log::error($th->getMessage());
-
-        //     notify()->error("Advised Create Failed.", "Error");
-        //     return back();
-        // }
+            notify()->error("Advised Create Failed.", "Error");
+            return back();
+        }
     }
 
     /**

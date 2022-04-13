@@ -55,7 +55,7 @@
                                                 <tr>
 
                                                     <td>
-                                                        <input type="checkbox" name="course_id[]" value="{{ $course->id }}_{{ $course->credit }}_{{ $course->amount }}"   title="Single Select" />
+                                                        <input type="checkbox" name="course_id[]" value="{{ $course->id }},{{ $course->credit }},{{ $course->amount }}"   title="Single Select" />
                                                     </td>
                                                     <td class="text-left">{{$loop->index +1  }}</td>
                                                     <td class="text-left"> {{ $course->code }}</td>
