@@ -16,7 +16,6 @@
                             <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#SL</th>
                                         <th class="text-center">Course Title</th>
                                         <th class="text-center">Course Code</th>
                                          <th class="text-center">Credit</th>
@@ -27,20 +26,27 @@
                                 <tbody>
                                     @foreach ($mycourses as $mycourse )
                                      @foreach ($mycourse->advisedCourses as $key=> $course )
+                                     @foreach ($course->courses as $course )
 
 
-                                     @dd($key);
+
                                      <tr>
-                                         <td class="text-center"></td>
-                                         <td class="text-center"></td>
-                                         <td class="text-center"></td>
-                                         <td class="text-center"></td>
-                                         <td class="text-center"></td>
+                                         <td class="text-center">{{ $course->name  }}</td>
+                                         <td class="text-center">{{ $course->code }}</td>
+                                         <td class="text-center">{{ $course->credit }}</td>
+                                         <td class="text-center">{{ $course->amount }}</td>
 
-
+                                         @php
+                                         $i=0;
+                                         $i= $i + $course->amount ;
+                                         @endphp
                                         </tr>
                                         @endforeach
                                         @endforeach
+                                        @endforeach
+                                        @php
+                                           dd($i);
+                                       @endphp
 
                                 </tbody>
                             </table>
