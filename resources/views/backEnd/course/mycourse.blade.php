@@ -18,38 +18,43 @@
                                     <tr>
                                         <th class="text-center">Course Title</th>
                                         <th class="text-center">Course Code</th>
-                                         <th class="text-center">Credit</th>
+                                        <th class="text-center">Credit</th>
                                         <th class="text-center">Amount</th>
 
                                     </tr>
                                 </thead>
+
+
+
                                 <tbody>
-                                    @foreach ($mycourses as $mycourse )
-                                     @foreach ($mycourse->advisedCourses as $key=> $course )
-                                     @foreach ($course->courses as $course )
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @if (!$advisedcourses)
+                                        @foreach ($advisedcourses as $course)
+                                            <tr>
+                                                <td class="text-center">{{ $course->course->name }}</td>
+                                                <td class="text-center">{{ $course->course->code }}</td>
+                                                <td class="text-center">{{ $course->credit }}</td>
+                                                <td class="text-center">{{ $course->fee }}</td>
 
+                                                @php
+                                                    $i = $i + $course->fee;
+                                                @endphp
 
-
-                                     <tr>
-                                         <td class="text-center">{{ $course->name  }}</td>
-                                         <td class="text-center">{{ $course->code }}</td>
-                                         <td class="text-center">{{ $course->credit }}</td>
-                                         <td class="text-center">{{ $course->amount }}</td>
-
-                                         @php
-                                         $i=0;
-                                         $i= $i + $course->amount ;
-                                         @endphp
-                                        </tr>
+                                            </tr>
                                         @endforeach
-                                        @endforeach
-                                        @endforeach
-                                        @php
-                                           dd($i);
-                                       @endphp
+                                    @endif
 
                                 </tbody>
+
+
                             </table>
+                            <h1>
+                                Total Amount : @php
+                                    echo $i;
+                                @endphp
+                            </h1>
                         </div>
                     </div>
                 </div>

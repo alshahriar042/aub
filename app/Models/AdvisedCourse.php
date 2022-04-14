@@ -15,9 +15,8 @@ class AdvisedCourse extends Model
         return $this->belongsTo(AdvisedCourse::class,);
     }
 
-    public function courses()
+    public function course()
     {
-        return $this->hasMany(Course::class,'id','course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
-
 }
