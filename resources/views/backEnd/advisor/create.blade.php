@@ -2,6 +2,10 @@
 
 @section('title', 'Advising Panel | AUB')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}">
+@endsection
+
 @section('content')
     <div class="section-body">
         <div class="row">
@@ -19,7 +23,7 @@
                                     <div class="col-md-6" style="padding: 0px; width: 100%">
                                         <div class="form-group" id="batch_data">
                                             <label for="batch">Student</label>
-                                            <select id="batch" class="form-control @error('batch') is-invalid @enderror"
+                                            <select id="batch" class="form-control select2 @error('batch') is-invalid @enderror"
                                                 name="student" required autofocus>
                                                 <option value="">Select Student</option>
                                                 @foreach ($students as $student)
@@ -91,7 +95,6 @@
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -102,8 +105,11 @@
 
 @endsection
 
-<div class="modal fade" id="empModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-
-    </div>
-</div>
+@section('js')
+    <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+@endsection

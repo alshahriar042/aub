@@ -30,18 +30,6 @@
 
                     </div>
 
-                    {{-- <div class="col-md-6">
-                        <div class="card-body text-center">
-                            <h5>
-                                <span style="float:right">
-                                    <strong>
-                                        ID No:&nbsp;&nbsp;{{ $id_no }}</span>
-
-                                    </strong>
-                            </h5>
-                        </div>
-                    </div> --}}
-
                     <div class="card-body">
                         <form action="{{ isset($user) ? route('users.update',$user->id) : route('users.store') }}" method="post" enctype="multipart/form-data">
                             @csrf

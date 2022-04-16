@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Advised;
 use App\Models\AdvisedCourse;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,7 +16,9 @@ class DashboardController extends Controller
     {
         Gate::authorize('dashboard');
 
-        return view('backEnd.dashboard');
+        $students = User::where('role_id',3)->orderBy('id','desc')->take(10)->get();
+
+        return view('backEnd.dashboard',compact('students'));
     }
 
     public function mycourse()
