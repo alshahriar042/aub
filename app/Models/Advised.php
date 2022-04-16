@@ -14,4 +14,9 @@ class Advised extends Model
     {
         return $this->hasMany(AdvisedCourse::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'student_id','id');
+    }
 }

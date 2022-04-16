@@ -11,6 +11,7 @@ use App\Http\Controllers\BackEnd\AdvisedController;
 use App\Http\Controllers\BackEnd\ProfileController;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
+use App\Http\Controllers\BackEnd\DropCourseController;
 use App\Http\Controllers\BackEnd\SemesterController;
 
 /*
@@ -60,5 +61,12 @@ Route::group(['middleware'=>'auth'],function(){
 
     /* *************** Semester *************** */
     Route::resource('semesters',SemesterController::class);
+
+    /* *************** Drop Course *************** */
+    Route::get('student-list',[DropCourseController::class,'index'])->name('student-list');
+
+
+
+
 
 });

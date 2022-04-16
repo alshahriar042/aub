@@ -66,6 +66,12 @@
                 </li>
             @endif
 
+            <li class="dropdown">
+                <a href="{{ route('student-list') }}" class="menu-toggle nav-link">
+                    <i data-feather="heart"></i><span>Drop Course</span>
+                </a>
+            </li>
+
             @if (Auth::user()->hasPermission('departments.index') || Auth::user()->hasPermission('batchs.index') || Auth::user()->hasPermission('semesters.index'))
                 <li class="menu-header">LookUp</li>
             @endif
