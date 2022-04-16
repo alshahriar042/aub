@@ -11,19 +11,19 @@
                         <h4>Student Advising</h4>
                     </div>
                     <div class="card-body">
-                                         <div class="form-row align-items-center">
+                        <div class="form-row align-items-center">
                             <div class="table-responsive">
                                 <form method="POST" action="{{ route('advised.store') }}">
                                     @csrf
 
-
-                                    <div class="col-md-6" style="padding: 0px; width: 100%" >
+                                    <div class="col-md-6" style="padding: 0px; width: 100%">
                                         <div class="form-group" id="batch_data">
                                             <label for="batch">Student</label>
-                                            <select id="batch" class="form-control @error('batch') is-invalid @enderror" name="student" required autofocus>
+                                            <select id="batch" class="form-control @error('batch') is-invalid @enderror"
+                                                name="student" required autofocus>
                                                 <option value="">Select Student</option>
-                                                @foreach($students as $student)
-                                                <option value="{{ $student->id }}">{{ $student->name }} </option>
+                                                @foreach ($students as $student)
+                                                    <option value="{{ $student->id }}">{{ $student->name }} </option>
                                                 @endforeach
                                             </select>
 
@@ -48,27 +48,29 @@
                                                 <th class="text-left">Available seat</th>
                                                 <th class="text-left">Credit</th>
                                                 <th class="text-left">Amount</th>
-                                                </tr>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($courses as $course )
+                                            @foreach ($courses as $course)
                                                 <tr>
 
                                                     <td>
-                                                        <input type="checkbox" name="course_id[]" value="{{ $course->id }},{{ $course->credit }},{{ $course->amount }}"   title="Single Select" />
+                                                        <input type="checkbox" name="course_id[]"
+                                                            value="{{ $course->id }},{{ $course->credit }},{{ $course->amount }}"
+                                                            title="Single Select" />
                                                     </td>
-                                                    <td class="text-left">{{$loop->index +1  }}</td>
+                                                    <td class="text-left">{{ $loop->index + 1 }}</td>
                                                     <td class="text-left"> {{ $course->code }}</td>
                                                     <td class="text-left">{{ $course->name }}</td>
                                                     <td class="text-left">{{ $course->user->name }}</td>
 
-                                                    <td class="text-left">               </td>
-                                                    <td class="text-left">               </td>
+                                                    <td class="text-left"> </td>
+                                                    <td class="text-left"> </td>
 
-                                                    <td class="text-left">   {{ $course->credit }}       </td>
-                                                    <td class="text-left">   {{ $course->amount }}       </td>
+                                                    <td class="text-left"> {{ $course->credit }} </td>
+                                                    <td class="text-left"> {{ $course->amount }} </td>
 
-                                                     {{-- <td class="text-left">
+                                                    {{-- <td class="text-left">
                                                        <input type="text" name="credit[]" value="{{ $course->credit }}">
                                                     </td>
 
@@ -79,7 +81,7 @@
                                                     </td> --}}
 
                                                 </tr>
-                                             @endforeach
+                                            @endforeach
                                         </tbody>
                                     </table>
                                     <div class="form-group">
@@ -105,5 +107,3 @@
 
     </div>
 </div>
-
-

@@ -20,10 +20,16 @@ class DashboardController extends Controller
 
     public function mycourse()
     {
+        Gate::authorize('mycourse');
 
         $mycourses = Advised::where('student_id', Auth::user()->id)->first();
-        $advisedcourses = AdvisedCourse::where('advised_id', $mycourses->id)->get();
 
-        return view('backEnd.course.mycourse', compact('advisedcourses'));
+        if (!empty($mycourses)) {
+            $advisedcourses = AdvisedCourse::where('advised_id', $mycourses->id)->get();
+
+            return view('backEnd.course.mycourse', compact('advisedcourses'));
+        }
+
+        return view('backEnd.course.mycourse');
     }
 }

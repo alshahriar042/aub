@@ -179,6 +179,40 @@ class PermissionSeeder extends Seeder
             'slug'      => 'semesters.destroy'
         ]);
 
+        /* ********* advising permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'Advising Managemant']);
+        // Permission::updateOrCreate([
+        //     'module_id' => $moduleUser->id,
+        //     'name'      => 'Access Advising',
+        //     'slug'      => 'advised.index'
+        // ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Create Advising',
+            'slug'      => 'advised.create'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Edit Advising',
+            'slug'      => 'advised.edit'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Delete Advising',
+            'slug'      => 'advised.destroy'
+        ]);
+
+        /* ********* mycourse permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'My Course Managemant']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access My Course',
+            'slug'      => 'mycourse'
+        ]);
+
 
 
 

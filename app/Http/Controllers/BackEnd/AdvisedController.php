@@ -6,11 +6,12 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Advised;
 use Illuminate\Http\Request;
+use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Gate;
 use function GuzzleHttp\Promise\each;
 
 class AdvisedController extends Controller
@@ -22,8 +23,10 @@ class AdvisedController extends Controller
      */
     public function index()
     {
-        $advisors = Advised::all();
-        return view('backEnd.advisor.index',compact('advisors'));
+        Gate::authorize('advised.index');
+
+        // $advisors = Advised::all();
+        // return view('backEnd.advisor.index',compact('advisors'));
     }
 
     /**
@@ -33,6 +36,8 @@ class AdvisedController extends Controller
      */
     public function create()
     {
+        Gate::authorize('advised.create');
+
         $students = User::where('role_id',3)->get();
         $courses =Course::orderBY('id')->get();
         // dd($courses);
@@ -47,6 +52,8 @@ class AdvisedController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('advised.create');
+
         try {
 
             $advised = Advised::create([
@@ -100,7 +107,7 @@ class AdvisedController extends Controller
      */
     public function edit($id)
     {
-        //
+        Gate::authorize('advised.edit');
     }
 
     /**
@@ -112,7 +119,7 @@ class AdvisedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Gate::authorize('advised.edit');
     }
 
     /**
@@ -123,6 +130,6 @@ class AdvisedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gate::authorize('advised.destroy');
     }
 }

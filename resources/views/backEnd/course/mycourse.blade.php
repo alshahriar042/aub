@@ -9,7 +9,6 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h4>My Course Lists</h4>
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -20,40 +19,30 @@
                                         <th class="text-center">Course Code</th>
                                         <th class="text-center">Credit</th>
                                         <th class="text-center">Amount</th>
-
                                     </tr>
                                 </thead>
-
-
-
                                 <tbody>
                                     @php
                                         $i = 0;
                                     @endphp
-                                    @if (!$advisedcourses)
+
+                                    @isset($advisedcourses)
                                         @foreach ($advisedcourses as $course)
                                             <tr>
                                                 <td class="text-center">{{ $course->course->name }}</td>
                                                 <td class="text-center">{{ $course->course->code }}</td>
                                                 <td class="text-center">{{ $course->credit }}</td>
                                                 <td class="text-center">{{ $course->fee }}</td>
-
                                                 @php
                                                     $i = $i + $course->fee;
                                                 @endphp
-
                                             </tr>
                                         @endforeach
-                                    @endif
-
+                                    @endisset
                                 </tbody>
-
-
                             </table>
                             <h1>
-                                Total Amount : @php
-                                    echo $i;
-                                @endphp
+                                Total Amount : @php  echo $i; @endphp
                             </h1>
                         </div>
                     </div>

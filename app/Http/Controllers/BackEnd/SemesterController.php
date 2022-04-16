@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class SemesterController extends Controller
 {
@@ -18,6 +19,8 @@ class SemesterController extends Controller
      */
     public function index()
     {
+        Gate::authorize('semesters.index');
+
         $semesters= Semester::orderBy('id')->get();
         return view('backEnd.semester.index',compact('semesters'));
     }
@@ -29,6 +32,8 @@ class SemesterController extends Controller
      */
     public function create()
     {
+        Gate::authorize('semesters.create');
+
         return view('backEnd.semester.form');
     }
 
@@ -40,6 +45,8 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('semesters.create');
+
         $this->validate($request,[
             'semester' => 'required',
         ]);
@@ -79,6 +86,7 @@ class SemesterController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('semesters.edit');
 
         $semester = Semester::findOrFail($id);
         return view('backEnd.semester.form',compact('semester'));
@@ -93,6 +101,8 @@ class SemesterController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('semesters.edit');
+
         $semester = Semester::findOrFail($id);
 
         $this->validate($request,[
@@ -123,6 +133,8 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('semesters.destroy');
+
         Semester::findOrFail($id)->delete();
 
         notify()->success("Semester delete successfully.", "Success");

@@ -36,28 +36,37 @@
                 </li>
             @endif
 
-            <li class="menu-header">Academic</li>
+            @if (Auth::user()->hasPermission('courses.index') || Auth::user()->hasPermission('mycourse') || Auth::user()->hasPermission('advised.create'))
+                <li class="menu-header">Academic</li>
+            @endif
+            {{-- <li class="menu-header">Academic</li> --}}
 
-            <li class="dropdown">
-                <a href="{{ route('courses.index') }}" class="menu-toggle nav-link">
-                    <i data-feather="life-buoy"></i><span>Courses</span>
-                </a>
-            </li>
+            @if (Auth::user()->hasPermission('courses.index'))
+                <li class="dropdown">
+                    <a href="{{ route('courses.index') }}" class="menu-toggle nav-link">
+                        <i data-feather="life-buoy"></i><span>Courses</span>
+                    </a>
+                </li>
+            @endif
 
-            <li class="dropdown">
-                <a href="{{ route('mycourse') }}" class="menu-toggle nav-link">
-                    <i data-feather="heart"></i><span>My Courses</span>
-                </a>
-            </li>
+            @if (Auth::user()->hasPermission('mycourse'))
+                <li class="dropdown">
+                    <a href="{{ route('mycourse') }}" class="menu-toggle nav-link">
+                        <i data-feather="heart"></i><span>My Courses</span>
+                    </a>
+                </li>
+            @endif
 
 
-            <li class="dropdown">
-                <a href="{{ route('advised.create') }}" class="menu-toggle nav-link">
-                    <i data-feather="heart"></i><span>Advising</span>
-                </a>
-            </li>
+            @if (Auth::user()->hasPermission('advised.create'))
+                <li class="dropdown">
+                    <a href="{{ route('advised.create') }}" class="menu-toggle nav-link">
+                        <i data-feather="heart"></i><span>Advising</span>
+                    </a>
+                </li>
+            @endif
 
-            @if (Auth::user()->hasPermission('departments.index') || Auth::user()->hasPermission('batchs.index'))
+            @if (Auth::user()->hasPermission('departments.index') || Auth::user()->hasPermission('batchs.index') || Auth::user()->hasPermission('semesters.index'))
                 <li class="menu-header">LookUp</li>
             @endif
 
@@ -77,12 +86,14 @@
                 </li>
             @endif
 
-            <li class="dropdown">
-                <a href="{{ route('semesters.index') }}" class="menu-toggle nav-link">
-                    <i data-feather="package"></i><span>Semester setup</span></a>
-                <ul class="dropdown-menu">
-                </ul>
-            </li>
+            @if (Auth::user()->hasPermission('semesters.index'))
+                <li class="dropdown">
+                    <a href="{{ route('semesters.index') }}" class="menu-toggle nav-link">
+                        <i data-feather="package"></i><span>Semester setup</span></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </li>
+            @endif
 
         </ul>
     </aside>
