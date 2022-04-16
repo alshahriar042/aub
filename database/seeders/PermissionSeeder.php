@@ -181,11 +181,11 @@ class PermissionSeeder extends Seeder
 
         /* ********* advising permission ************ */
         $moduleUser = Module::updateOrCreate(['name' => 'Advising Managemant']);
-        // Permission::updateOrCreate([
-        //     'module_id' => $moduleUser->id,
-        //     'name'      => 'Access Advising',
-        //     'slug'      => 'advised.index'
-        // ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access Advising',
+            'slug'      => 'advised.index'
+        ]);
 
         Permission::updateOrCreate([
             'module_id' => $moduleUser->id,

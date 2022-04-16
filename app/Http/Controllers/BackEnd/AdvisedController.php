@@ -10,9 +10,7 @@ use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Gate;
-use function GuzzleHttp\Promise\each;
 
 class AdvisedController extends Controller
 {
@@ -25,8 +23,8 @@ class AdvisedController extends Controller
     {
         Gate::authorize('advised.index');
 
-        // $advisors = Advised::all();
-        // return view('backEnd.advisor.index',compact('advisors'));
+        $advisors = Advised::all();
+        return view('backEnd.advisor.index',compact('advisors'));
     }
 
     /**
