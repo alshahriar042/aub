@@ -27,7 +27,7 @@
                                                 name="student" required autofocus>
                                                 <option value="">Select Student</option>
                                                 @foreach ($students as $student)
-                                                    <option value="{{ $student->id }}">{{ $student->name }} </option>
+                                                    <option value="{{ $student->id }}"> {{ $student->name }} </option>
                                                 @endforeach
                                             </select>
 
@@ -48,8 +48,6 @@
                                                 <th class="text-left">Course Code</th>
                                                 <th class="text-left">Course Title</th>
                                                 <th class="text-left">Faculty</th>
-                                                <th class="text-left">Total Seat</th>
-                                                <th class="text-left">Available seat</th>
                                                 <th class="text-left">Credit</th>
                                                 <th class="text-left">Amount</th>
                                             </tr>
@@ -67,22 +65,8 @@
                                                     <td class="text-left"> {{ $course->code }}</td>
                                                     <td class="text-left">{{ $course->name }}</td>
                                                     <td class="text-left">{{ $course->user->name }}</td>
-
-                                                    <td class="text-left"> </td>
-                                                    <td class="text-left"> </td>
-
                                                     <td class="text-left"> {{ $course->credit }} </td>
                                                     <td class="text-left"> {{ $course->amount }} </td>
-
-                                                    {{-- <td class="text-left">
-                                                       <input type="text" name="credit[]" value="{{ $course->credit }}">
-                                                    </td>
-
-
-                                                     <td class="text-left">
-                                                        <input type="text" name="fee[]" value="{{ $course->amount }} ">
-
-                                                    </td> --}}
 
                                                 </tr>
                                             @endforeach

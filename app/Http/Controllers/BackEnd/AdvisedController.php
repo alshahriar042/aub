@@ -76,7 +76,7 @@ class AdvisedController extends Controller
             }
 
             notify()->success("Advised create successfully.", "Success");
-            return redirect()->route('advised.index');
+            return redirect()->route('advised.create');
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

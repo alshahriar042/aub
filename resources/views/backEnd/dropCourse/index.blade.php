@@ -9,7 +9,6 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h4>Student Lists</h4>
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -20,16 +19,21 @@
                                         <th class="text-center">Student Name</th>
                                         <th class="text-center">Student Id</th>
                                         <th class="text-center">Taken Course</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($advied_students as $advied_student)
+                                    @foreach ($advised_students as $advised_student)
+                                    {{-- @dd($advised_student); --}}
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $advied_student->user->name }}</td>
-                                            <td class="text-center">{{ $advied_student->user->user_id }}</td>
-                                            {{-- <td class="text-center">{{ $advied_student->department->name }}</td> --}}
+                                            <td class="text-center">{{ $advised_student->user->name }}</td>
+                                            <td class="text-center">{{ $advised_student->user->user_id }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('course-list',$advised_student->student_id) }}" class="btn btn-primary m-1" target="_blank">
+                                                    <i class="fas fa-file">&nbsp;</i>
+                                                    Course list
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -64,6 +64,9 @@ Route::group(['middleware'=>'auth'],function(){
 
     /* *************** Drop Course *************** */
     Route::get('student-list',[DropCourseController::class,'index'])->name('student-list');
+    Route::get('course-list/{id}',[DropCourseController::class,'show'])->name('course-list');
+    Route::delete('course-delete/{id}',[DropCourseController::class,'destroy'])->name('course-destroy');
+
 
 
 
