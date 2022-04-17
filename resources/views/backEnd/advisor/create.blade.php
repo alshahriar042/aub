@@ -19,26 +19,45 @@
                             <div class="table-responsive">
                                 <form method="POST" action="{{ route('advised.store') }}">
                                     @csrf
+                                    <div class="row">
+                                        <div class="col-md-6" style="width: 100%">
+                                            <div class="form-group" id="batch_data">
+                                                <label for="student">Student</label>
+                                                <select id="student" class="form-control select2 @error('student') is-invalid @enderror"
+                                                    name="student" required autofocus>
+                                                    <option value="">Select Student</option>
+                                                    @foreach ($students as $student)
+                                                        <option value="{{ $student->id }}"> {{ $student->name }} </option>
+                                                    @endforeach
+                                                </select>
 
-                                    <div class="col-md-6" style="padding: 0px; width: 100%">
-                                        <div class="form-group" id="batch_data">
-                                            <label for="batch">Student</label>
-                                            <select id="batch" class="form-control select2 @error('batch') is-invalid @enderror"
-                                                name="student" required autofocus>
-                                                <option value="">Select Student</option>
-                                                @foreach ($students as $student)
-                                                    <option value="{{ $student->id }}"> {{ $student->name }} </option>
-                                                @endforeach
-                                            </select>
+                                                @error('student')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
 
-                                            @error('student')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <div class="col-md-4" style="width: 100%">
+                                            <div class="form-group">
+                                                <label for="semister">Semester</label>
+                                                <select id="semister" class="form-control @error('semister') is-invalid @enderror"
+                                                    name="semister" required autofocus>
+                                                    <option value="">Select Semister</option>
+                                                    <option value="Spring">Spring</option>
+                                                    <option value="Summer">Summer</option>
+                                                    <option value="Fall">Fall</option>
+                                                </select>
+
+                                                @error('semister')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
-
 
                                     <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                                         <thead>
@@ -55,7 +74,6 @@
                                         <tbody>
                                             @foreach ($courses as $course)
                                                 <tr>
-
                                                     <td>
                                                         <input type="checkbox" name="course_id[]"
                                                             value="{{ $course->id }},{{ $course->credit }},{{ $course->amount }}"

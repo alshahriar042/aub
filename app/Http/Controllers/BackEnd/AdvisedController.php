@@ -53,30 +53,34 @@ class AdvisedController extends Controller
         Gate::authorize('advised.create');
 
         try {
+            if (!Advised::where('student_id',$request->student)->exists()) {
+                $all_datas = $request->course_id;
+                if (!empty($all_datas)) {
+                    $advised = Advised::create([
+                        'student_id' => $request->student,
+                        'teacher_id' => Auth::user()->id,
+                    ]);
 
-            $advised = Advised::create([
-                'student_id' => $request->student,
-                'teacher_id' => Auth::user()->id,
-            ]);
+                    foreach ($all_datas as $key => $data) {
+                        $new_datas = explode(",",$data);
 
-            $all_datas = $request->course_id;
-            if (!empty($all_datas)) {
-                foreach ($all_datas as $key => $data) {
-                    $new_datas = explode(",",$data);
-
-                    $all_course_val = [
-                        'advised_id' => $advised->id,
-                        'course_id'  => $new_datas[0],
-                        'credit'     => $new_datas[1],
-                        'fee'        => $new_datas[2],
-                        'semister'   => "summer-2022"
-                    ];
-                    AdvisedCourse::create($all_course_val);
+                        $all_course_val = [
+                            'advised_id' => $advised->id,
+                            'course_id'  => $new_datas[0],
+                            'credit'     => $new_datas[1],
+                            'fee'        => $new_datas[2],
+                            'semister'   => $request->semister
+                        ];
+                        AdvisedCourse::create($all_course_val);
+                    }
                 }
-            }
 
-            notify()->success("Advised create successfully.", "Success");
-            return redirect()->route('advised.create');
+                notify()->success("Advised create successfully.", "Success");
+                return redirect()->route('advised.create');
+            } else {
+                notify()->warning("This student already completed advising", "Warning");
+                return redirect()->route('advised.create');
+            }
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
