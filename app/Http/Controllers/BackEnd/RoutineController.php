@@ -7,8 +7,8 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RoutineController extends Controller
 {
@@ -19,6 +19,8 @@ class RoutineController extends Controller
      */
     public function index()
     {
+        Gate::authorize('routines.index');
+
         $user = Auth::user();
         if ($user->role_id == 3) {
             $routines = Routine::where('dept_id', $user->dept_id)->orderBy('id')->get();
@@ -37,6 +39,8 @@ class RoutineController extends Controller
      */
     public function create()
     {
+        Gate::authorize('routines.create');
+
         $departments = Department::all();
         return view('backEnd.routine.form',compact('departments'));
     }
@@ -49,6 +53,8 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('routines.create');
+
         $this->validate($request,[
             'routine'    => 'required',
             'semester'   => 'required',
@@ -89,6 +95,8 @@ class RoutineController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('routines.show');
+
         $data = Routine::findOrFail($id);
         return response()->download(public_path('file/routine/'.$data->routine));
     }
@@ -124,6 +132,8 @@ class RoutineController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('routines.destroy');
+
         try {
             $find_routine = Routine::findOrFail($id);
             if (!empty($find_routine)) {
