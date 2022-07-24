@@ -214,6 +214,33 @@ class PermissionSeeder extends Seeder
         ]);
 
 
+        /* ********* routine permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'Routine Managemant']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access Routine',
+            'slug'      => 'routines.index'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Create Routine',
+            'slug'      => 'routines.create'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Download Routine',
+            'slug'      => 'routines.show'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Delete Routine',
+            'slug'      => 'routines.destroy'
+        ]);
+
+
 
 
     }

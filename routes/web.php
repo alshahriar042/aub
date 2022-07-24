@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\Backend\AdvisedController as BackendAdvisedController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BackEnd\CourseController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\UserController;
 use App\Http\Controllers\BackEnd\BatchController;
+use App\Http\Controllers\BackEnd\CourseController;
 use App\Http\Controllers\BackEnd\AdvisedController;
 use App\Http\Controllers\BackEnd\ProfileController;
+use App\Http\Controllers\BackEnd\RoutineController;
+use App\Http\Controllers\BackEnd\SemesterController;
 use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
 use App\Http\Controllers\BackEnd\DropCourseController;
-use App\Http\Controllers\BackEnd\SemesterController;
+use App\Http\Controllers\Backend\AdvisedController as BackendAdvisedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ Route::group(['middleware'=>'auth'],function(){
 
     /* *************** Semester *************** */
     Route::resource('semesters',SemesterController::class);
+
+    /* *************** Routine *************** */
+    Route::resource('routines',RoutineController::class);
 
     /* *************** Drop Course *************** */
     Route::get('student-list',[DropCourseController::class,'index'])->name('student-list');

@@ -46,7 +46,7 @@ class BatchController extends Controller
         Gate::authorize('batchs.create');
 
         $this->validate($request,[
-            'name' => 'required|numeric|min:1|max:3|unique:batches',
+            'name' => 'required|numeric|min:1|unique:batches',
         ]);
 
         try {
