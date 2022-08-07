@@ -14,6 +14,7 @@ use App\Http\Controllers\BackEnd\DashboardController;
 use App\Http\Controllers\BackEnd\DepartmentController;
 use App\Http\Controllers\BackEnd\DropCourseController;
 use App\Http\Controllers\Backend\AdvisedController as BackendAdvisedController;
+use App\Http\Controllers\PreviousCourse;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('password',[ProfileController::class,'password'])->name('password');
     Route::post('posfile-update',[ProfileController::class,'update'])->name('profile_update');
     Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
+
+    Route::get('previous-courses',[PreviousCourse::class,'index'])->name('previousCourses.index');
+
 
     /* *************** Course *************** */
     Route::resource('courses',CourseController::class);

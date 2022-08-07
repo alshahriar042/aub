@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\BackEnd;
 
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Batch;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\Batch;
-use App\Models\Department;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,20 +39,13 @@ class UserController extends Controller
 
         Gate::authorize('users.create');
 
-        $month = date("m");
-        $max_rec_id = DB::select(DB::raw("select count(*) max_job_id from users where month(created_at) = $month"));
-        if ($max_rec_id[0]->max_job_id == 0) {
-            $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
-        } else {
-            $max_job_id = $max_rec_id[0]->max_job_id < 10 ? "0" . $max_rec_id[0]->max_job_id + 1 : $max_rec_id[0]->max_job_id + 1;
-        }
-        $id_no = "AUB" . "-" . date("ymd") . $max_job_id;
+
 
         $roles       = Role::all();
         $batchs      = Batch::all();
         $departments = Department::all();
 
-        return view('backEnd.users.form',compact('roles','departments','batchs','id_no'));
+        return view('backEnd.users.form',compact('roles','departments','batchs'));
     }
 
     /**
@@ -78,7 +72,11 @@ class UserController extends Controller
 
         try {
 
-            $user_id = date("Ym").rand(100,999);
+            // $user_id = date("Ym").rand(100,999);
+            $startOfYear = Carbon::now()->startOfYear();
+            $endOfYear = Carbon::now()->endOfYear();
+            $students = User::where('created_at', '>' , $startOfYear)->where('created_at', '<', $endOfYear)->get();
+            $count = count($students) + 1;
 
             $user = User::create([
                 'role_id'       => $request->role,
@@ -88,7 +86,7 @@ class UserController extends Controller
                 'gender'        => $request->gender,
                 'dept_id'       => $request->department,
                 'batch_id'      => $request->batch ? $request->batch : NULL,
-                'user_id'       => $user_id,
+                'user_id'       => Carbon::now()->toDateString().$count,
                 'status'        => $request->filled('status')
             ]);
 
