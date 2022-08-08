@@ -38,7 +38,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $course->user->name }}</td>
-                                            <td class="text-center">{{ $course->user->id }}</td>
+                                            <td class="text-center">{{ $course->user->user_id }}</td>
                                             <td class="text-center">{{ $c->course->name }}</td>
                                             <td class="text-center">{{ $c->course->code }}</td>
                                             {{-- <td class="text-center">{{ $course->department->name }}</td> --}}
