@@ -15,6 +15,7 @@ use App\Http\Controllers\BackEnd\DepartmentController;
 use App\Http\Controllers\BackEnd\DropCourseController;
 use App\Http\Controllers\Backend\AdvisedController as BackendAdvisedController;
 use App\Http\Controllers\PreviousCourse;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('password-update',[ProfileController::class,'passwordUpdate'])->name('password_update');
 
     Route::get('previous-courses',[PreviousCourse::class,'index'])->name('previousCourses.index');
+    Route::get('result-entry',[ResultController::class,'create'])->name('result.index');
+    Route::post('result-store',[ResultController::class,'store'])->name('result.store');
 
 
     /* *************** Course *************** */

@@ -58,6 +58,13 @@
             @endif
 
 
+            <li class="dropdown">
+                <a href="{{ route('result.index') }}" class="menu-toggle nav-link">
+                    <i data-feather="briefcase"></i><span>Result Entry</span>
+                </a>
+            </li>
+
+
             @if (Auth::user()->hasPermission('advised.create'))
                 <li class="dropdown">
                     <a href="{{ route('advised.create') }}" class="menu-toggle nav-link">
@@ -101,6 +108,9 @@
                     </a>
                 </li>
             @endif
+
+
+
 
             @if (Auth::user()->hasPermission('batchs.index'))
                 <li class="dropdown">
