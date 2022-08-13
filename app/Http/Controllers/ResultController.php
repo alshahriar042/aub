@@ -6,12 +6,13 @@ use App\Models\User;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Gate;
 
 class ResultController extends Controller
 {
     public function create()
     {
-        // Gate::authorize('advised.create');
+        Gate::authorize('result.index');
 
         $students = User::where('role_id',3)->get();
         $courses =Result::orderBY('id')->get();
@@ -21,8 +22,7 @@ class ResultController extends Controller
 
     public function store(Request $request)
     {
-        // Gate::authorize('batchs.create');
-
+        Gate::authorize('result.index');
 
         try {
             Result::create([

@@ -244,8 +244,17 @@ class PermissionSeeder extends Seeder
         $moduleUser = Module::updateOrCreate(['name' => 'previous Courses Managemant']);
         Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
-            'name'      => 'Access previous Course',
+            'name'      => 'Access Previous Course',
             'slug'      => 'previousCourses.index'
+        ]);
+
+
+        /* ********* routine permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'Result Entry Managemant']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access Result Entry',
+            'slug'      => 'result.index'
         ]);
 
 
