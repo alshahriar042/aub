@@ -46,5 +46,15 @@ class UserSeeder extends Seeder
             'status'   => true,
             'remember_token' => Str::random(10),
         ]);
+
+        User::updateOrCreate([
+            'role_id'  => Role::where('slug','co_admin')->first()->id,
+            'name'     => 'Co Admin',
+            'email'    => 'coadmin@app.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'status'   => true,
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

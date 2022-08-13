@@ -240,6 +240,13 @@ class PermissionSeeder extends Seeder
             'slug'      => 'routines.destroy'
         ]);
 
+        /* ********* routine permission ************ */
+        $moduleUser = Module::updateOrCreate(['name' => 'previous Courses Managemant']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Access previous Course',
+            'slug'      => 'previousCourses.index'
+        ]);
 
 
 

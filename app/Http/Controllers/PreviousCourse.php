@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advised;
 use App\Models\Course;
+use App\Models\Advised;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PreviousCourse extends Controller
 {
     public function index()
     {
-        $courses = Advised::with(['user','advisedCourses','advisedCourses.course'])->get();
+        Gate::authorize('previousCourses.index');
 
-        // return  $courses;
+        $courses = Advised::with(['user','advisedCourses','advisedCourses.course'])->get();
 
         return view('backEnd.course.previouscourse',compact('courses'));
     }

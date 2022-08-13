@@ -53,5 +53,11 @@ class RoleSeeder extends Seeder
             'slug'      => 'student',
             'deletable' => false
         ]);
+
+        Role::updateOrCreate([
+            'name'      => 'Co Admin',
+            'slug'      => 'co_admin',
+            'deletable' => false
+        ]);
     }
 }
