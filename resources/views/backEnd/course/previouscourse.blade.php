@@ -8,12 +8,8 @@
             <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h4>Course Lists</h4>
-                            <div class="card-header-action">
-                                <a class="btn btn-primary" href="{{ route('courses.create') }}">
-                                    <i class="fas fa-plus">&nbsp;</i> Create Course
-                                </a>
-                            </div>
+                        <h4>Previous Record</h4>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

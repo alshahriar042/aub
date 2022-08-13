@@ -128,7 +128,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         /* ********* courses permission ************ */
-        $moduleUser = Module::updateOrCreate(['name' => 'Course Managemant']);
+        $moduleUser = Module::updateOrCreate(['name' => 'Course Offering Managemant']);
         Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name'      => 'Access Course',

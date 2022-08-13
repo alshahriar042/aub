@@ -69,7 +69,7 @@
             @if (Auth::user()->hasPermission('previousCourses.index'))
                 <li class="dropdown">
                     <a href="{{ route('previousCourses.index') }}" class="menu-toggle nav-link">
-                        <i data-feather="life-buoy"></i><span>Previous Courses</span>
+                        <i data-feather="life-buoy"></i><span>Previous Record</span>
                     </a>
                 </li>
             @endif
