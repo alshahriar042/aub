@@ -27,7 +27,7 @@
                                                     name="student" required autofocus>
                                                     <option value="">Select Student</option>
                                                     @foreach ($students as $student)
-                                                        <option value="{{ $student->id }}"> {{ $student->name }} </option>
+                                                        <option value="{{ $student->id }}"> {{ $student->user_id }} </option>
                                                     @endforeach
                                                 </select>
 

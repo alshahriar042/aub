@@ -66,6 +66,12 @@
                 </li>
             @endif
 
+            <li class="dropdown">
+                <a href="{{ route('previousCourses.index') }}" class="menu-toggle nav-link">
+                    <i data-feather="life-buoy"></i><span>Previous Courses</span>
+                </a>
+            </li>
+
             @if (Auth::user()->hasPermission('student-list'))
                 <li class="dropdown">
                     <a href="{{ route('student-list') }}" class="menu-toggle nav-link">
