@@ -14,6 +14,7 @@ class PreviousCourse extends Controller
         Gate::authorize('previousCourses.index');
 
         $courses = Advised::with(['user','advisedCourses','advisedCourses.course'])->get();
+        // dd($courses);
 
         return view('backEnd.course.previouscourse',compact('courses'));
     }

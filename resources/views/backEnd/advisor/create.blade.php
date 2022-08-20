@@ -45,9 +45,9 @@
                                                 <select id="semister" class="form-control @error('semister') is-invalid @enderror"
                                                     name="semister" required autofocus>
                                                     <option value="">Select Semister</option>
-                                                    <option value="Summer">Summer2022</option>
-                                                    <option value="Fall">Fall2022</option>
-                                                    <option value="Spring">Spring2023</option>
+                                                    <option value="Summer2022">Summer2022</option>
+                                                    <option value="Fall2022">Fall2022</option>
+                                                    <option value="Spring2023">Spring2023</option>
                                                 </select>
 
                                                 @error('semister')

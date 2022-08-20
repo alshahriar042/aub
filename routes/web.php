@@ -78,6 +78,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('course-list/{id}',[DropCourseController::class,'show'])->name('course-list');
     Route::delete('course-delete/{id}',[DropCourseController::class,'destroy'])->name('course-destroy');
 
+    Route::get('my-result',[DropCourseController::class,'myresult'])->name('my-result');
+
+
 
 
 

@@ -48,7 +48,7 @@ class SemesterController extends Controller
         Gate::authorize('semesters.create');
 
         $this->validate($request,[
-            'semester' => 'required',
+            'semester' => 'required|unique:semesters,currentSemester',
         ]);
 
         try {

@@ -11,7 +11,7 @@
                         <h4>Current Semester</h4>
                             <div class="card-header-action">
                                 <a class="btn btn-primary" href="{{ route('semesters.create') }}">
-                                    <i class="fas fa-plus">&nbsp;</i> Create Department
+                                    <i class="fas fa-plus">&nbsp;</i> Create Semester
                                 </a>
                             </div>
                     </div>
@@ -42,7 +42,8 @@
                                                     <span>Delete</span>
                                                 </button>
 
-                                                <form id="delete-form-{{ $semester->id }}" method="POST" action="{{ route('semesters.destroy',$semester->id) }}" style="display: none;">
+                                                <form id="delete-form-{{ $semester->id }}" method="POST" action="{{ route('semesters.destroy',$semester->id) }}"
+                                                    style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

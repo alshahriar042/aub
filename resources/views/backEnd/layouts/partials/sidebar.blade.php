@@ -65,6 +65,14 @@
                 </li>
             @endif
 
+            @if (Auth::user()->hasPermission('my-result') )
+            <li class="dropdown">
+                <a href="{{ route('my-result') }}" class="menu-toggle nav-link">
+                    <i data-feather="briefcase"></i><span>My Result</span>
+                </a>
+            </li>
+        @endif
+
 
             @if (Auth::user()->hasPermission('advised.create'))
                 <li class="dropdown">
@@ -121,14 +129,14 @@
                 </li>
             @endif
 
-            {{-- @if (Auth::user()->hasPermission('semesters.index'))
+            @if (Auth::user()->hasPermission('semesters.index'))
                 <li class="dropdown">
                     <a href="{{ route('semesters.index') }}" class="menu-toggle nav-link">
                         <i data-feather="package"></i><span>Semester setup</span></a>
                     <ul class="dropdown-menu">
                     </ul>
                 </li>
-            @endif --}}
+            @endif
 
         </ul>
     </aside>

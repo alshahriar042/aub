@@ -17,6 +17,7 @@
                                     <tr>
                                         <th class="text-center">Course Title</th>
                                         <th class="text-center">Course Code</th>
+                                        <th class="text-center">Semester</th>
                                         <th class="text-center">Credit</th>
                                         <th class="text-center">Amount</th>
                                     </tr>
@@ -31,6 +32,7 @@
                                             <tr>
                                                 <td class="text-center">{{ $course->course->name }}</td>
                                                 <td class="text-center">{{ $course->course->code }}</td>
+                                                <td class="text-center">{{ $course->semister }}</td>
                                                 <td class="text-center">{{ $course->credit }}</td>
                                                 <td class="text-center">{{ $course->fee }}</td>
                                                 @php

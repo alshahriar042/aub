@@ -19,6 +19,7 @@
                                         <th class="text-center">#SL</th>
                                         <th class="text-center">Student name</th>
                                         <th class="text-center">Student Id</th>
+                                        <th class="text-center">Semester</th>
                                         <th class="text-center">Course Title</th>
                                         <th class="text-center">Course Code</th>
                                         {{-- <th class="text-center">Department</th>
@@ -30,11 +31,12 @@
                                 <tbody>
                                     @foreach ($courses as $course)
                                     @foreach ($course->advisedCourses as $c)
-                                    {{-- @dd($c->course->name); --}}
+                                    {{-- @dd($c->semister); --}}
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $course->user->name }}</td>
                                             <td class="text-center">{{ $course->user->user_id }}</td>
+                                            <td class="text-center">{{ $c->semister }}</td>
                                             <td class="text-center">{{ $c->course->name }}</td>
                                             <td class="text-center">{{ $c->course->code }}</td>
                                             {{-- <td class="text-center">{{ $course->department->name }}</td> --}}

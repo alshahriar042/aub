@@ -23,8 +23,12 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('semesters.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ isset($semester) ? route('semesters.update',$semester->id) : route('semesters.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+
+                            @isset($semester)
+                                @method('PUT')
+                            @endisset
 
                             <div class="form-row align-items-center">
                                 <div class="col-md-12">
@@ -34,7 +38,13 @@
                                                 <h5 class="card-title">Semester Info</h5>
                                                 <div class="form-group">
                                                     <label for="batch">Semester</label>
-                                                    <input type="text" class="form-control" name="semester" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Semester">
+
+                                                    <select id="batch" class="form-control @error('semester') is-invalid @enderror" name="semester" autofocus>
+                                                        <option value="">Select Semester</option>
+                                                        <option value="summer" {{ @$semester->currentSemester == "summer" ? 'selected' : '' }}>Summer</option>
+                                                        <option value="spring" {{ @$semester->currentSemester == "spring" ? 'selected' : '' }}>Spring</option>
+                                                        <option value="fall" {{ @$semester->currentSemester == "fall" ? 'selected' : '' }}>Fall</option>
+                                                    </select>
 
                                                     @error('semester')
                                                         <span class="invalid-feedback" role="alert">
@@ -47,8 +57,8 @@
                                         <div class="col-md-11" style="margin-left: 10px;">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
-                                                    <i class="fa {{'fa-plus-circle' }}"></i>
-                                                    <span>{{'Save Semester' }}</span>
+                                                    <i class="fa {{ @$semester? 'fa-arrow-circle-up' : 'fa-plus-circle' }}"></i>
+                                                    <span>{{ @$semester? 'Update Semester' : 'Save Semester' }}</span>
                                                 </button>
                                             </div>
                                         </div>

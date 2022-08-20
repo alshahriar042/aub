@@ -263,6 +263,12 @@ class PermissionSeeder extends Seeder
             'slug'      => 'result.store'
         ]);
 
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'My Result ',
+            'slug'      => 'my-result'
+        ]);
+
 
 
     }

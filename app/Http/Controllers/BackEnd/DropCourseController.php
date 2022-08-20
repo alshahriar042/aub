@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Result;
+use Illuminate\Support\Facades\Auth;
 
 class DropCourseController extends Controller
 {
+
+    public function myresult()
+    {
+       $id= Auth::user()->user_id;
+       $myresult = Result::where('student_id',$id)->first();
+
+       return  view('backEnd.result.myresult',compact('myresult'));
+    }
+
+
     public function index()
     {
        $advised_students = Advised::all();
