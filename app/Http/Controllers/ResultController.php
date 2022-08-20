@@ -28,14 +28,20 @@ class ResultController extends Controller
         Gate::authorize('result.store');
 
         try {
-            Result::create([
-                'student_id' => $request->student,
-                'semester' => $request->semister,
-                'result' => $request->result,
-            ]);
+            if(!Result::where('student_id',$request->student)->where('semester',$request->semister)->exists()){
 
-            notify()->success("Result create successfully.", "Success");
-            return redirect()->route('result.index');
+                Result::create([
+                    'student_id' => $request->student,
+                    'semester' => $request->semister,
+                    'result' => $request->result,
+                ]);
+
+                notify()->success("Result create successfully.", "Success");
+                return redirect()->route('result.index');
+            }else{
+                notify()->warning("Result Already Exists", "Warning");
+                return redirect()->route('result.index');
+            }
 
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

@@ -17,8 +17,10 @@ class DropCourseController extends Controller
     {
        $id= Auth::user()->user_id;
        $myresult = Result::where('student_id',$id)->first();
+      if($myresult){
 
-       return  view('backEnd.result.myresult',compact('myresult'));
+          return  view('backEnd.result.myresult',compact('myresult'));
+      }
     }
 
 
