@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Advised;
 use Illuminate\Http\Request;
 use App\Models\AdvisedCourse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class AdvisedController extends Controller
         Gate::authorize('advised.index');
 
         $advisors = Advised::all();
-        return view('backEnd.advisor.index',compact('advisors'));
+        return view('backEnd.advisor.index', compact('advisors'));
     }
 
     /**
@@ -36,10 +37,10 @@ class AdvisedController extends Controller
     {
         Gate::authorize('advised.create');
 
-        $students = User::where('role_id',3)->get();
-        $courses =Course::orderBY('id')->get();
+        $students = User::where('role_id', 3)->get();
+        $courses = Course::orderBY('id')->get();
         // dd($courses);
-        return view('backEnd.advisor.create',compact('courses','students'));
+        return view('backEnd.advisor.create', compact('courses', 'students'));
     }
 
     /**
@@ -53,7 +54,10 @@ class AdvisedController extends Controller
         Gate::authorize('advised.create');
 
         try {
-            if (!Advised::where('student_id',$request->student)->exists()) {
+            if (!(DB::table('adviseds')
+                ->join('advised_courses', 'adviseds.id', '=', 'advised_courses.advised_id')
+                ->where('adviseds.student_id', $request->student)
+                ->where('advised_courses.semister', $request->semister))->exists()) {
                 $all_datas = $request->course_id;
                 if (!empty($all_datas)) {
                     $advised = Advised::create([
@@ -62,7 +66,7 @@ class AdvisedController extends Controller
                     ]);
 
                     foreach ($all_datas as $key => $data) {
-                        $new_datas = explode(",",$data);
+                        $new_datas = explode(",", $data);
 
                         $all_course_val = [
                             'advised_id' => $advised->id,
@@ -81,7 +85,6 @@ class AdvisedController extends Controller
                 notify()->warning("This student already completed advising", "Warning");
                 return redirect()->route('advised.create');
             }
-
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
 
