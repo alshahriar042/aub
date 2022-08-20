@@ -38,10 +38,10 @@
                         <div class="form-group col-md-12 col-12">
                             <label for="semester">Semester</label>
                             <select id="semester" class="form-control @error('semester') is-invalid @enderror" name="semester" required autofocus>
-                                <option value="">Select Semester</option>
-                                <option value="Spring">Spring</option>
-                                <option value="Summer">Summer</option>
-                                <option value="Fall">Fall</option>
+                                <option value="">Select Semister</option>
+                                @foreach ($semesters as $semester)
+                                <option value="{{ $semester->currentSemester }}">{{ $semester->currentSemester }}</option>
+                                @endforeach
                             </select>
 
                             @error('semester')

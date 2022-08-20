@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Result;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate;
@@ -16,8 +17,10 @@ class ResultController extends Controller
 
         $students = User::where('role_id',3)->get();
         $courses =Result::orderBY('id')->get();
+        $semesters = Semester::orderBY('id')->get();
+
         // dd($courses);
-        return view('backEnd.result.create',compact('courses','students'));
+        return view('backEnd.result.create',compact('courses','students','semesters'));
     }
 
     public function store(Request $request)

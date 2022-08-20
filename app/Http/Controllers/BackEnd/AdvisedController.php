@@ -10,6 +10,7 @@ use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Semester;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -39,8 +40,9 @@ class AdvisedController extends Controller
 
         $students = User::where('role_id', 3)->get();
         $courses = Course::orderBY('id')->get();
+        $semesters = Semester::orderBY('id')->get();
         // dd($courses);
-        return view('backEnd.advisor.create', compact('courses', 'students'));
+        return view('backEnd.advisor.create', compact('courses', 'students','semesters'));
     }
 
     /**

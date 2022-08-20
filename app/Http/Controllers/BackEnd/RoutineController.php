@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Models\Routine;
+use App\Models\Semester;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -42,7 +43,9 @@ class RoutineController extends Controller
         Gate::authorize('routines.create');
 
         $departments = Department::all();
-        return view('backEnd.routine.form',compact('departments'));
+        $semesters = Semester::orderBY('id')->get();
+
+        return view('backEnd.routine.form',compact('departments','semesters'));
     }
 
     /**
