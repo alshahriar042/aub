@@ -22,7 +22,7 @@ class ResultController extends Controller
 
     public function store(Request $request)
     {
-        Gate::authorize('result.index');
+        Gate::authorize('result.store');
 
         try {
             Result::create([

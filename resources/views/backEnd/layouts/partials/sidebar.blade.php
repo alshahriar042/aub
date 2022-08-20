@@ -57,7 +57,7 @@
                 </li>
             @endif
 
-            @if (Auth::user()->hasPermission('result.index'))
+            @if (Auth::user()->hasPermission('result.index') || (Auth::user()->hasPermission('result.store')) )
                 <li class="dropdown">
                     <a href="{{ route('result.index') }}" class="menu-toggle nav-link">
                         <i data-feather="briefcase"></i><span>Result Entry</span>
@@ -121,14 +121,14 @@
                 </li>
             @endif
 
-            @if (Auth::user()->hasPermission('semesters.index'))
+            {{-- @if (Auth::user()->hasPermission('semesters.index'))
                 <li class="dropdown">
                     <a href="{{ route('semesters.index') }}" class="menu-toggle nav-link">
                         <i data-feather="package"></i><span>Semester setup</span></a>
                     <ul class="dropdown-menu">
                     </ul>
                 </li>
-            @endif
+            @endif --}}
 
         </ul>
     </aside>

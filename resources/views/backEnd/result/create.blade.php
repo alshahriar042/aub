@@ -12,11 +12,13 @@
             <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h4>Student Advising</h4>
+                        <h4>Student Result</h4>
                     </div>
                     <div class="card-body">
                         <div class="form-row align-items-center">
                             <div class="table-responsive">
+                                @if (Auth::user()->hasPermission('result.store'))
+
                                 <form method="POST" action="{{ route('result.store') }}">
                                     @csrf
                                     <div class="row">
@@ -85,7 +87,7 @@
                                         </button>
                                     </div>
                                 </form>
-
+                                  @endif
                                 <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                                     <thead>
                                         <tr>

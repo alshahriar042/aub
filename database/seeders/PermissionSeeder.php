@@ -249,12 +249,18 @@ class PermissionSeeder extends Seeder
         ]);
 
 
-        /* ********* routine permission ************ */
+        /* ********* result permission ************ */
         $moduleUser = Module::updateOrCreate(['name' => 'Result Entry Managemant']);
         Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
-            'name'      => 'Access Result Entry',
+            'name'      => 'Access Result',
             'slug'      => 'result.index'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Result Update',
+            'slug'      => 'result.store'
         ]);
 
 
