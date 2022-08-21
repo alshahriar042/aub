@@ -205,6 +205,12 @@ class PermissionSeeder extends Seeder
             'slug'      => 'advised.destroy'
         ]);
 
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Drop Course',
+            'slug'      => 'student-list'
+        ]);
+
         /* ********* mycourse permission ************ */
         $moduleUser = Module::updateOrCreate(['name' => 'My Course Managemant']);
         Permission::updateOrCreate([
@@ -266,7 +272,7 @@ class PermissionSeeder extends Seeder
         Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name'      => 'My Result ',
-            'slug'      => 'my-result'
+            'slug'      => 'my-resultstudent-list'
         ]);
 
 

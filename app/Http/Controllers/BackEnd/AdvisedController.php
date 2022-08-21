@@ -56,7 +56,7 @@ class AdvisedController extends Controller
         Gate::authorize('advised.create');
 
         try {
-            if (!(DB::table('adviseds')
+            if ( !(DB::table('adviseds')
                 ->join('advised_courses', 'adviseds.id', '=', 'advised_courses.advised_id')
                 ->where('adviseds.student_id', $request->student)
                 ->where('advised_courses.semister', $request->semister))->exists()) {

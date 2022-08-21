@@ -90,13 +90,13 @@
                 </li>
             @endif
 
-            @if (Auth::user()->hasPermission('student-list'))
+            {{-- @if (Auth::user()->hasPermission('student-list')) --}}
                 <li class="dropdown">
                     <a href="{{ route('student-list') }}" class="menu-toggle nav-link">
                         <i data-feather="heart"></i><span>Drop Course</span>
                     </a>
                 </li>
-            @endif
+            {{-- @endif --}}
 
             @if (Auth::user()->hasPermission('routines.index'))
                 <li class="dropdown">
