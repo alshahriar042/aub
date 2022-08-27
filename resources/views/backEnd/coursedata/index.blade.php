@@ -29,10 +29,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($departments as $department)
+                                        @php
+                                            $pre_name = App\Models\Course::where('id', $department->pre_name)->first()->name;
+                                        @endphp
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $department->coursename->name }}</td>
-                                            <td class="text-center">{{ $department->coursename->name }}</td>
+                                            <td class="text-center">{{ $pre_name }}</td>
                                             <td class="text-center">{{ $department->created_at->diffForHumans() }}</td>
                                             {{-- <td class="text-center">
                                                 <a href="{{ route('coursedata.edit', $department->id) }}"

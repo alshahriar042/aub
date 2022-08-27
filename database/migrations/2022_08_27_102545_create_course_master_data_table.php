@@ -15,7 +15,7 @@ class CreateCourseMasterDataTable extends Migration
     {
         Schema::create('course_master_data', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('pre_name');
             $table->timestamps();
         });

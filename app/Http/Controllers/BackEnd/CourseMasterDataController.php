@@ -42,18 +42,25 @@ class CourseMasterDataController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:course_master_data,name',
             'pre_name' => 'required',
         ]);
 
         try {
-            CourseMasterData::create([
-                'name' => $request->name,
-                'pre_name' => $request->pre_name,
-            ]);
+            if($request->name == $request->pre_name){
+                notify()->warning("Course & Prequisite Can't Be Same", "Warning");
 
-            notify()->success("Course create successfully.", "Success");
-            return redirect()->route('coursedata.index');
+            return back();
+            }else{
+                CourseMasterData::create([
+                    'name' => $request->name,
+                    'pre_name' => $request->pre_name,
+                ]);
+
+                notify()->success("Course create successfully.", "Success");
+                return redirect()->route('coursedata.index');
+            }
+
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
 

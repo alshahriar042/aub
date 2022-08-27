@@ -10,6 +10,7 @@ use App\Models\AdvisedCourse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\CourseMasterData;
 use App\Models\Semester;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -42,7 +43,7 @@ class AdvisedController extends Controller
         $courses = Course::orderBY('id')->get();
         $semesters = Semester::orderBY('id')->get();
         // dd($courses);
-        return view('backEnd.advisor.create', compact('courses', 'students','semesters'));
+        return view('backEnd.advisor.create', compact('courses', 'students', 'semesters'));
     }
 
     /**
@@ -56,7 +57,9 @@ class AdvisedController extends Controller
         Gate::authorize('advised.create');
 
         try {
-            if ( !(DB::table('adviseds')
+            DB::beginTransaction();
+
+            if (!(DB::table('adviseds')
                 ->join('advised_courses', 'adviseds.id', '=', 'advised_courses.advised_id')
                 ->where('adviseds.student_id', $request->student)
                 ->where('advised_courses.semister', $request->semister))->exists()) {
@@ -69,27 +72,55 @@ class AdvisedController extends Controller
 
                     foreach ($all_datas as $key => $data) {
                         $new_datas = explode(",", $data);
+                        $prequisite = CourseMasterData::where('name', $new_datas[0])->first();
+                        if ($prequisite) {
+                            if (DB::table('adviseds')
+                                ->join('advised_courses', 'adviseds.id', '=', 'advised_courses.advised_id')
+                                ->where('advised_courses.course_id', $prequisite->pre_name)
+                                ->where('adviseds.student_id', $request->student)->exists()
+                            )
 
-                        $all_course_val = [
-                            'advised_id' => $advised->id,
-                            'course_id'  => $new_datas[0],
-                            'credit'     => $new_datas[1],
-                            'fee'        => $new_datas[2],
-                            'semister'   => $request->semister
-                        ];
-                        AdvisedCourse::create($all_course_val);
+                            {
+                                $all_course_val = [
+                                    'advised_id' => $advised->id,
+                                    'course_id'  => $new_datas[0],
+                                    'credit'     => $new_datas[1],
+                                    'fee'        => $new_datas[2],
+                                    'semister'   => $request->semister
+                                ];
+                                AdvisedCourse::create($all_course_val);
+                                DB::commit();
+                                notify()->success("Advised create successfully.", "Success");
+                                return redirect()->route('advised.create');
+                            } else {
+                                notify()->warning("Prequisite Not Yet Completed", "Warning");
+                                return back();
+                            }
+
+
+                        } else {
+                                $all_course_val = [
+                                    'advised_id' => $advised->id,
+                                    'course_id'  => $new_datas[0],
+                                    'credit'     => $new_datas[1],
+                                    'fee'        => $new_datas[2],
+                                    'semister'   => $request->semister
+                                ];
+                                AdvisedCourse::create($all_course_val);
+                                DB::commit();
+                                notify()->success("Advised create successfully.", "Success");
+                                return redirect()->route('advised.create');
+
+                        }
                     }
                 }
-
-                notify()->success("Advised create successfully.", "Success");
-                return redirect()->route('advised.create');
             } else {
                 notify()->warning("This student already completed advising", "Warning");
                 return redirect()->route('advised.create');
             }
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-
+            DB::rollBack();
             notify()->error("Advised Create Failed.", "Error");
             return back();
         }

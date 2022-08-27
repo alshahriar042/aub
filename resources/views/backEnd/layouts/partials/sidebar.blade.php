@@ -124,7 +124,7 @@
 
             <li class="dropdown">
                 <a href="{{ route('coursedata.index') }}" class="menu-toggle nav-link">
-                    <i data-feather="briefcase"></i><span>Course Data</span>
+                    <i data-feather="briefcase"></i><span>Prequisite Course</span>
                 </a>
             </li>
 
