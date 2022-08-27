@@ -13,16 +13,22 @@ class Course extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'teacher_id','id');
+        return $this->belongsTo(User::class, 'teacher_id', 'id');
     }
 
     public function department()
     {
-        return $this->belongsTo(Department::class,'dept_id','id');
+        return $this->belongsTo(Department::class, 'dept_id', 'id');
     }
 
     public function advisedcourses()
     {
-        return $this->belongsTo(AdvisedCourse::class,'id','course_id');
+        return $this->belongsTo(AdvisedCourse::class, 'id', 'course_id');
+    }
+
+
+    public function coursedatas()
+    {
+        return $this->belongsTo(CourseMasterData::class);
     }
 }
