@@ -64,6 +64,8 @@ class AdvisedController extends Controller
                 ->where('adviseds.student_id', $request->student)
                 ->where('advised_courses.semister', $request->semister))->exists()) {
                 $all_datas = $request->course_id;
+
+                // dd($all_datas);
                 if (!empty($all_datas)) {
                     $advised = Advised::create([
                         'student_id' => $request->student,
@@ -72,6 +74,8 @@ class AdvisedController extends Controller
 
                     foreach ($all_datas as $key => $data) {
                         $new_datas = explode(",", $data);
+
+                        // dd($new_datas);
                         $prequisite = CourseMasterData::where('name', $new_datas[0])->first();
                         if ($prequisite) {
                             if (DB::table('adviseds')
@@ -90,8 +94,7 @@ class AdvisedController extends Controller
                                 ];
                                 AdvisedCourse::create($all_course_val);
                                 DB::commit();
-                                notify()->success("Advised create successfully.", "Success");
-                                return redirect()->route('advised.create');
+
                             } else {
                                 notify()->warning("Prequisite Not Yet Completed", "Warning");
                                 return back();
@@ -108,11 +111,15 @@ class AdvisedController extends Controller
                                 ];
                                 AdvisedCourse::create($all_course_val);
                                 DB::commit();
-                                notify()->success("Advised create successfully.", "Success");
-                                return redirect()->route('advised.create');
+                                // notify()->success("Advised create successfully.", "Success");
+                                // return redirect()->route('advised.create');
 
                         }
                     }
+
+                    notify()->success("Advised create successfully.", "Success");
+                    return redirect()->route('advised.create');
+
                 }
             } else {
                 notify()->warning("This student already completed advising", "Warning");

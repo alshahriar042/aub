@@ -47,11 +47,10 @@ class CourseMasterDataController extends Controller
         ]);
 
         try {
-            if($request->name == $request->pre_name){
+            if ($request->name == $request->pre_name) {
                 notify()->warning("Course & Prequisite Can't Be Same", "Warning");
-
-            return back();
-            }else{
+                return back();
+            } else {
                 CourseMasterData::create([
                     'name' => $request->name,
                     'pre_name' => $request->pre_name,
@@ -60,7 +59,6 @@ class CourseMasterDataController extends Controller
                 notify()->success("Course create successfully.", "Success");
                 return redirect()->route('coursedata.index');
             }
-
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
 
