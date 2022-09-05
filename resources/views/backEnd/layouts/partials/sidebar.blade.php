@@ -92,13 +92,13 @@
                 </li>
             @endif
 
-            {{-- @if (Auth::user()->hasPermission('student-list')) --}}
+            @if (Auth::user()->hasPermission('student-list'))
             <li class="dropdown">
                 <a href="{{ route('student-list') }}" class="menu-toggle nav-link">
                     <i data-feather="heart"></i><span>Drop Course</span>
                 </a>
             </li>
-            {{-- @endif --}}
+            @endif
 
             @if (Auth::user()->hasPermission('routines.index'))
                 <li class="dropdown">
@@ -122,11 +122,14 @@
                 </li>
             @endif
 
+            @if (Auth::user()->hasPermission('coursedata.index'))
+
             <li class="dropdown">
                 <a href="{{ route('coursedata.index') }}" class="menu-toggle nav-link">
                     <i data-feather="briefcase"></i><span>Prequisite Course</span>
                 </a>
             </li>
+            @endif
 
 
             @if (Auth::user()->hasPermission('batchs.index'))

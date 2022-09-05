@@ -7,9 +7,11 @@
         <div class="form-row">
             <div class="col-12">
                 <div class="card card-primary rounded-0 shadow-sm">
+
                     <div class="card-body text-center">
                         <h4 class="mb-0">{{ @$department ? 'Edit' : 'Create' }} Department</h4>
                     </div>
+
                 </div>
             </div>
 
@@ -24,6 +26,7 @@
                         </a>
                     </div>
                     <div class="card-body">
+
                         <form
                             action="{{ isset($department) ? route('coursedata.update', $department->id) : route('coursedata.store') }}"
                             method="post" enctype="multipart/form-data">
@@ -102,6 +105,7 @@
                                     </div>
                                 </div>
                         </form>
+                        {{-- @endif --}}
                     </div>
                 </div>
             </div>

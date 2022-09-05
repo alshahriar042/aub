@@ -9,11 +9,14 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h4>Course Lists</h4>
+                        @if (Auth::user()->hasPermission('coursedata.create'))
+
                         <div class="card-header-action">
                             <a class="btn btn-primary" href="{{ route('coursedata.create') }}">
                                 <i class="fas fa-plus">&nbsp;</i> Create Course
                             </a>
                         </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

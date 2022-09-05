@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Result;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class DropCourseController extends Controller
 {
@@ -26,6 +28,8 @@ class DropCourseController extends Controller
 
     public function index()
     {
+        Gate::authorize('student-list');
+
        $advised_students = Advised::all();
 
         if(!empty($advised_students)){

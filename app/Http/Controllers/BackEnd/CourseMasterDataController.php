@@ -7,6 +7,8 @@ use App\Models\CourseMasterData;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use Illuminate\Support\Facades\Gate;
+
 
 class CourseMasterDataController extends Controller
 {
@@ -17,6 +19,8 @@ class CourseMasterDataController extends Controller
      */
     public function index()
     {
+        Gate::authorize('coursedata.index');
+
         $departments = CourseMasterData::all();
         return view('backEnd.coursedata.index', compact('departments'));
     }
@@ -28,6 +32,8 @@ class CourseMasterDataController extends Controller
      */
     public function create()
     {
+        Gate::authorize('coursedata.create');
+
         $courses = Course::all();
         return view('backEnd.coursedata.form', compact('courses'));
     }
@@ -40,7 +46,10 @@ class CourseMasterDataController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        // Gate::authorize('coursedata.store');
+        Gate::authorize('coursedata.create');
+
+
         $this->validate($request, [
             'name' => 'required|unique:course_master_data,name',
             'pre_name' => 'required',

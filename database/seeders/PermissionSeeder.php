@@ -211,6 +211,19 @@ class PermissionSeeder extends Seeder
             'slug'      => 'student-list'
         ]);
 
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Prequisite Course List',
+            'slug'      => 'coursedata.index'
+        ]);
+
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUser->id,
+            'name'      => 'Prequisite Course Create',
+            'slug'      => 'coursedata.create'
+        ]);
+
         /* ********* mycourse permission ************ */
         $moduleUser = Module::updateOrCreate(['name' => 'My Course Managemant']);
         Permission::updateOrCreate([
